@@ -1,11 +1,11 @@
 {
-    "name": "zain-burfat/rbac",
+    "name": "zainburfat/rbac",
     "description": "demo",
     "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Zain\\Rbac\\": "src/"
+            "Zain-burfat\\Rbac\\": "src/"
         }
     },
     "authors": [
@@ -17,5 +17,10 @@
     "minimum-stability": "dev",
     "require": {
         "laravel/passport": "^10.4"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Zainburfat\\rbac\\": "src/"
+        }
     }
 }
