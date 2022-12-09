@@ -75,6 +75,7 @@ class CreateControllerPermission extends Command
             }
             $this->newLine();
         }
+
         $this->info("$newPermissions new permissions were created and $oldPermissions permissions already exists.");
 
         $this->newLine(2);
