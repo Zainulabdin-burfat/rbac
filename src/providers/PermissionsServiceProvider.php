@@ -6,6 +6,7 @@ use App\Models\Permission;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Zainburfat\rbac\Commands\CreateControllerPermission;
 
 class PermissionsServiceProvider extends ServiceProvider
 {
@@ -16,7 +17,15 @@ class PermissionsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->loadMigrationsFrom(__DIR__.'');
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                CreateControllerPermission::class,
+            ]);
+        }
+
+        $this->loadRoutesFrom(__DIR__.'./routes/api.php');
+        // $this->loadRoutesFrom(__DIR__.'./routes/web.php');
+        $this->loadMigrationsFrom(__DIR__.'./database/migrations');
     }
 
     /**

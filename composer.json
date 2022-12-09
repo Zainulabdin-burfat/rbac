@@ -22,5 +22,12 @@
         "psr-4": {
             "Zainburfat\\rbac\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Zainburfat\\rbac\\PermissionsServiceProvider"
+            ]
+        }
     }
 }
