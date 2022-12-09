@@ -1,6 +1,6 @@
 <?php
 
-namespace Zainburfat\rbac;
+namespace Zainburfat\rbac\providers;
 
 use App\Models\Permission;
 use Illuminate\Support\Facades\Blade;
@@ -23,9 +23,9 @@ class PermissionsServiceProvider extends ServiceProvider
             ]);
         }
 
-        $this->loadRoutesFrom(__DIR__.'./routes/api.php');
+        $this->loadRoutesFrom(__DIR__.'/../routes/api.php');
         // $this->loadRoutesFrom(__DIR__.'./routes/web.php');
-        $this->loadMigrationsFrom(__DIR__.'./database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
     }
 
     /**
