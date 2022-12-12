@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace Zainburfat\rbac\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,7 +15,6 @@ class Role extends Model
     {
         return $this->belongsToMany(Permission::class, 'permission_role');
     }
-
 
     public function users()
     {

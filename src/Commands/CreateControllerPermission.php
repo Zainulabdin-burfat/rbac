@@ -2,8 +2,8 @@
 
 namespace Zainburfat\rbac\Commands;
 
-use App\Models\Permission;
-use App\Models\RolePermission;
+use Zainburfat\rbac\Models\Permission;
+use Zainburfat\rbac\Models\RolePermission;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;

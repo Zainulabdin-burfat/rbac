@@ -1,20 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace Zainburfat\rbac\Traits;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Passport\HasApiTokens;
+use Zainburfat\rbac\Models\Permission;
+use Zainburfat\rbac\Models\Role;
 
-class User extends Authenticatable
+trait UserPermissionTrait
 {
-    use HasApiTokens, HasFactory, Notifiable;
-
-    protected $fillable = ['name', 'email', 'password'];
-
-    protected $hidden = ['remember_token', 'email_verified_at', 'password'];
-
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'role_user');
@@ -63,20 +55,5 @@ class User extends Authenticatable
     public function getDirectPermissions()
     {
         return $this->permissions->pluck('name')->toArray();
-    }
-
-    public function posts()
-    {
-        return $this->hasMany(Post::class);
-    }
-
-    public function formatIndex()
-    {
-        return [
-            "id" => $this->id,
-            "name" => $this->name,
-            "email" => $this->email,
-            "roles" => $this->roles->pluck('name', 'id')->toArray(),
-        ];
     }
 }
