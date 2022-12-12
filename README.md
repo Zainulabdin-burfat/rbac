@@ -12,3 +12,8 @@
 <h5>php artisan db:seed</h5>
 <h5>php artisan create:permission</h5>
 <p>Permissions are created dynamically through command according to the controllers having methods</p>
+
+
+add middleware
+app/http/kernel.php under protected $routeMiddleware
+'permissions' => \Zainburfat\rbac\Middleware\Permissions::class,
