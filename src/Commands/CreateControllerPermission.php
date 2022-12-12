@@ -2,11 +2,14 @@
 
 namespace Zainburfat\rbac\Commands;
 
+use Illuminate\Support\Facades\DB;
 use Zainburfat\rbac\Models\Permission;
 use Zainburfat\rbac\Models\RolePermission;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Zainburfat\rbac\Models\Role;
+use Zainburfat\rbac\Models\UserRole;
 
 class CreateControllerPermission extends Command
 {
@@ -45,8 +48,10 @@ class CreateControllerPermission extends Command
             unset($files[0]);
         }
 
-        if (!count($files))
-            return $this->error("No Countrollers Found..!");
+        if (!count($files)) {
+            $this->error("No Countrollers Found..!");
+            return 0;
+        }
 
         $newPermissions = 0;
         $oldPermissions = 0;
@@ -77,17 +82,35 @@ class CreateControllerPermission extends Command
                 }
             }
             $this->newLine();
-        }
+        } // end foreach
 
         $this->info("$newPermissions new permissions were created and $oldPermissions permissions already exists.");
-
         $this->newLine(2);
+
+
+
+        // Here we assign all permissions to demo admin role
 
         $permissions = Permission::get('id')->pluck('id')->toArray();
 
+
+        $user = DB::table('users')->insertOrIgnore([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('password'),
+        ]);
+
+        $this->info(($user) ? "Admin created" : "Admin already exist");
+        $this->newLine();
+
+        $user = DB::table('users')->where('email', 'admin@admin.com')->first('id');
+
+        $role = Role::firstOrCreate(['name' => 'Admin']);
+        UserRole::insertOrIgnore(['user_id' => $user->id, 'role_id' => $role->id]);
+
         $permissionIds = [];
         foreach ($permissions as $permissionId) {
-            $permissionIds[] = ['role_id' => 1, 'permission_id' => $permissionId];
+            $permissionIds[] = ['role_id' => $role->id, 'permission_id' => $permissionId];
         }
 
         if ($permissionIds) {
@@ -104,5 +127,6 @@ class CreateControllerPermission extends Command
 
         $this->newLine(2);
         $this->alert("The last method of controllers should be destroy() method, otherwise it will not create any permissions after that.");
+        return 1;
     }
 }
