@@ -26,7 +26,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Zainburfat\\rbac\\providers\\PermissionsServiceProvider"
+                "Zainburfat\\rbac\\Providers\\PermissionsServiceProvider"
             ]
         }
     }
