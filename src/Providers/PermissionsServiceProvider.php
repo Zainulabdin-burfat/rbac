@@ -2,13 +2,11 @@
 
 namespace Zainburfat\rbac\Providers;
 
-use Illuminate\Routing\Router;
 use Zainburfat\rbac\Models\Permission;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Zainburfat\rbac\Commands\CreateControllerPermission;
-use Zainburfat\rbac\Http\Middleware\Permissions;
 
 class PermissionsServiceProvider extends ServiceProvider
 {
@@ -25,8 +23,8 @@ class PermissionsServiceProvider extends ServiceProvider
             ]);
         }
 
-        $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadRoutesFrom(__DIR__ . './../routes/api.php');
+        $this->loadMigrationsFrom(__DIR__ . './../database/migrations');
     }
 
     /**
@@ -34,7 +32,7 @@ class PermissionsServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(Router $router)
+    public function boot()
     {
         try {
             Permission::get()->map(function ($permission) {
@@ -47,12 +45,6 @@ class PermissionsServiceProvider extends ServiceProvider
             return false;
         }
 
-        $router->middlewareGroup(
-            'permission',
-            [
-                Zainburfat\rbac\Http\Middleware\Permissions::class,
-            ]
-        );
 
         //Blade directives
 
@@ -60,7 +52,6 @@ class PermissionsServiceProvider extends ServiceProvider
         Blade::directive('permission', function ($permission) {
             return "<?php if(Auth::check() && (Auth::user()->hasPermissionTo($permission) || Auth::user()->hasDirectPermissionTo($permission)) ){ ?>";
         });
-
         Blade::directive('endpermission', function () {
             return "<?php } ?>";
         });
@@ -69,7 +60,6 @@ class PermissionsServiceProvider extends ServiceProvider
         Blade::directive('role', function ($role) {
             return "<?php if(Auth::check() && Auth::user()->hasRole($role) ){ ?>";
         });
-
         Blade::directive('endrole', function () {
             return "<?php } ?>";
         });
