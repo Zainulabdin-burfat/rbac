@@ -27,6 +27,9 @@ class CreateControllerPermission extends Command
                 continue;
 
             $methods[] = (string) Str::of($controllerName)->append(" " . $method)->slug('.');
+
+            if ($method === "destroy")
+                break;
         }
 
         return $methods;
@@ -98,5 +101,8 @@ class CreateControllerPermission extends Command
             $this->warn("No Permissions Found..!");
             $this->newLine();
         }
+
+        $this->newLine(2);
+        $this->alert("The last method of controllers should be destroy() method, otherwise it will not create any permissions after that.");
     }
 }
