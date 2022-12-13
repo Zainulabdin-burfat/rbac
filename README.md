@@ -17,13 +17,17 @@
 <h3>Commands</h3>
 
     composer require zainburfat/rbac
-<li>use Trait in User Model <b> use UserPermissionTrait</b></li>
+
+<b>use Trait in User Model</b>
+    use UserPermissionTrait
+
+<b>Then run migrations</b>
     php artisan migrate
 
 <br>
 <h5>Add route middleware for web routes authorization</h5>
 <p>app/http/kernel.php under protected $routeMiddleware</p>
-<li>'permissions' => \Zainburfat\rbac\Middleware\Permissions::class,</li>
+'permissions' => \Zainburfat\rbac\Middleware\Permissions::class,
 
 
 
