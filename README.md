@@ -7,13 +7,16 @@
 <li>php >= 7.3</li>
 
 <h3>Commands</h3>
-<h5>php artisan vendor:publish</h5>
-<h5>php artisan migrate</h5>
-<h5>php artisan db:seed</h5>
-<h5>php artisan create:permission</h5>
+<li>composer require zainburfat/rbac</li>
+<li>php artisan migrate</li>
+<li>php artisan create:permission</li>
+<li></li>
+
 <p>Permissions are created dynamically through command according to the controllers having methods</p>
 
+<br>
+<h5>add middleware</h5>
+<p>app/http/kernel.php under protected $routeMiddleware</p>
+<li>'permissions' => \Zainburfat\rbac\Middleware\Permissions::class,</li>
 
-add middleware
-app/http/kernel.php under protected $routeMiddleware
-'permissions' => \Zainburfat\rbac\Middleware\Permissions::class,
+
