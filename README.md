@@ -25,6 +25,8 @@
     use UserPermissionTrait
 
 <b>Then run migrations</b>
+<br>
+
     php artisan migrate
 
 <br>
