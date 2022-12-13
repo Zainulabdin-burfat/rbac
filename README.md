@@ -14,6 +14,7 @@
 
 <h3>Commands</h3>
 <li>composer require zainburfat/rbac</li>
+<li>use Trait in User Model <b> use UserPermissionTrait</b></li>
 <li>php artisan migrate</li>
 <li>php artisan create:permission</li>
 <li></li>
