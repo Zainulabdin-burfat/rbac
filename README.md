@@ -32,6 +32,7 @@
 
 <!-- Passport Installation -->
 <li>php artisan passport:install</li>
+<p>Permissions are created dynamically through command according to the controllers having methods</p>
 <li>php artisan create:permission</li>
 <li>
     <p>After running the passport:install command, add the Laravel\Passport\HasApiTokens trait to your App\Models\User model. This trait will provide a few helper methods to your model which allow you to inspect the authenticated user's token and scopes. If your model is already using the Laravel\Sanctum\HasApiTokens trait, you may remove that trait:</p>
@@ -64,7 +65,22 @@
     ],
 </li>
 
+<h5>Add route middleware for api routes authorization</h5>
+<p>app/http/kernel.php under protected $routeMiddleware</p>
+<li>
+    'scopes' => \Laravel\Passport\Http\Middleware\CheckScopes::class,
+    'scope' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
+</li>
+<h5>How to protect routes using scopes auth</h5>
+<li>
+    Route::group(['middleware' => 'auth:api'], function(){
+        Route::get('/users', 'UserController@index')->middleware('scope:user.index');
+    });
+</li>
+<h5>To check multiple scopes</h5>
+<li>->middleware('scopes:check-status,place-orders')</li>
 
-<p>Permissions are created dynamically through command according to the controllers having methods</p>
+
+
 
 <br>
