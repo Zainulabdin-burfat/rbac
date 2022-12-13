@@ -56,4 +56,8 @@ trait UserPermissionTrait
     {
         return $this->permissions->pluck('name')->toArray();
     }
+
+    public function createToken($tokenName, $tokenAbilities){
+
+    }
 }

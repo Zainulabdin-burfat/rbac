@@ -6,6 +6,7 @@ use Zainburfat\rbac\Models\Permission;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Passport\Passport;
 use Zainburfat\rbac\Commands\CreateControllerPermission;
 
 class PermissionsServiceProvider extends ServiceProvider
@@ -34,6 +35,14 @@ class PermissionsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Passport::routes();
+        $permissions = Permission::select('name')->get()->pluck('name')->toArray();
+        Passport::tokensCan($permissions);
+
+        Passport::tokensExpireIn(now()->addSeconds(20));
+        Passport::personalAccessTokensExpireIn(now()->addSeconds(20));
+        Passport::refreshTokensExpireIn(now()->addHours(1));
+
         try {
             Permission::get()->map(function ($permission) {
                 Gate::define($permission->name, function ($user) use ($permission) {

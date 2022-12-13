@@ -5,6 +5,8 @@ namespace Zainburfat\rbac\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Http;
 
 class AuthController extends Controller
 {
@@ -37,5 +39,29 @@ class AuthController extends Controller
         }
 
         return false;
+    }
+
+    public function updateToken(Request $request)
+    {
+        $token = Str::random(60);
+
+        $request->user()->forceFill([
+            'api_token' => hash('sha256', $token),
+        ])->save();
+
+        return ['token' => $token];
+    }
+
+    public function refreshToken()
+    {
+        $response = Http::asForm()->post('http://passport-app.test/oauth/token', [
+            'grant_type' => 'refresh_token',
+            'refresh_token' => 'the-refresh-token',
+            'client_id' => 'client-id',
+            'client_secret' => 'client-secret',
+            'scope' => '',
+        ]);
+
+        return $response->json();
     }
 }
