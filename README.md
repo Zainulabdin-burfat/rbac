@@ -15,10 +15,13 @@
 <li>php >= 7.3</li>
 
 <h3>Commands</h3>
+<br>
 
     composer require zainburfat/rbac
 
 <b>use Trait in User Model</b>
+<br>
+
     use UserPermissionTrait
 
 <b>Then run migrations</b>
