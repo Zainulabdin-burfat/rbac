@@ -19,6 +19,7 @@ class CreateControllerPermission extends Command
     public function __construct()
     {
         parent::__construct();
+        PermissionsServiceProvider::createScopes();
     }
 
     public function getControllerMethodNames($controller, $controllerName, $namespace = "App\Http\Controllers")

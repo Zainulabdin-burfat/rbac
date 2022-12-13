@@ -35,7 +35,7 @@ class PermissionsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->createScopes();
+        // $this->createScopes();
 
         try {
             Permission::get()->map(function ($permission) {
@@ -68,7 +68,7 @@ class PermissionsServiceProvider extends ServiceProvider
         });
     }
 
-    public function createScopes()
+    public static function createScopes()
     {
         Passport::routes();
         $all_permissions = Permission::select('name')->get()->pluck('name')->toArray();
