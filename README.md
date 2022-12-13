@@ -32,15 +32,17 @@
 <br>
 <h5>Add route middleware for web routes authorization</h5>
 <p>app/http/kernel.php under protected $routeMiddleware</p>
-'permissions' => \Zainburfat\rbac\Middleware\Permissions::class,
+<br>
+
+    'permissions' => \Zainburfat\rbac\Middleware\Permissions::class,
 
 
 
 
 
-
+<br>
 <!-- Passport Installation -->
-<li>php artisan passport:install</li>
+    php artisan passport:install
 <p>Permissions are created dynamically through command according to the controllers having methods</p>
 
     php artisan create:permission
