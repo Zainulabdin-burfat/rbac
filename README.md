@@ -33,42 +33,35 @@
 <!-- Passport Installation -->
 <li>php artisan passport:install</li>
 <li>php artisan create:permission</li>
-<li>php artisan create:permission</li>
 <li>
     <p>After running the passport:install command, add the Laravel\Passport\HasApiTokens trait to your App\Models\User model. This trait will provide a few helper methods to your model which allow you to inspect the authenticated user's token and scopes. If your model is already using the Laravel\Sanctum\HasApiTokens trait, you may remove that trait:</p>
 </li>
 <li>
-    <textarea name="" id="" cols="30" rows="10">
-    <?php
-     
-        namespace App\Models;
-         
-        use Illuminate\Database\Eloquent\Factories\HasFactory;
-        use Illuminate\Foundation\Auth\User as Authenticatable;
-        use Illuminate\Notifications\Notifiable;
-        use Laravel\Passport\HasApiTokens;
-         
-        class User extends Authenticatable
-        {
-            use HasApiTokens, HasFactory, Notifiable;
-        }
-    </textarea>
+    namespace App\Models;
+        
+    use Illuminate\Database\Eloquent\Factories\HasFactory;
+    use Illuminate\Foundation\Auth\User as Authenticatable;
+    use Illuminate\Notifications\Notifiable;
+    use Laravel\Passport\HasApiTokens;
+        
+    class User extends Authenticatable
+    {
+        use HasApiTokens, HasFactory, Notifiable;
+    }
 </li>
 <li><p>Finally, in your application's config/auth.php configuration file, you should define an api authentication guard and set the driver option to passport. This will instruct your application to use Passport's TokenGuard when authenticating incoming API requests:</p></li>
 <li>
-    <pre>
-        'guards' => [
-            'web' => [
-                'driver' => 'session',
-                'provider' => 'users',
-            ],
-        
-            'api' => [
-                'driver' => 'passport',
-                'provider' => 'users',
-            ],
+    'guards' => [
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
         ],
-    </pre>
+    
+        'api' => [
+            'driver' => 'passport',
+            'provider' => 'users',
+        ],
+    ],
 </li>
 
 

@@ -35,9 +35,7 @@ class PermissionsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Passport::routes();
-        $permissions = Permission::select('name')->get()->pluck('name')->toArray();
-        Passport::tokensCan($permissions);
+        $this->createScopes();
 
         Passport::tokensExpireIn(now()->addSeconds(20));
         Passport::personalAccessTokensExpireIn(now()->addSeconds(20));
@@ -72,5 +70,16 @@ class PermissionsServiceProvider extends ServiceProvider
         Blade::directive('endrole', function () {
             return "<?php } ?>";
         });
+    }
+
+    public function createScopes()
+    {
+        Passport::routes();
+        $all_permissions = Permission::select('name')->get()->pluck('name')->toArray();
+        $permissions = [];
+        foreach ($all_permissions as $permission) {
+            $permissions[$permission->name] = $permission->name;
+        }
+        Passport::tokensCan($permissions);
     }
 }
