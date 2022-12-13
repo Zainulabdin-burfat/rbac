@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Zainburfat\rbac\Http\Controllers\Api\AuthController;
 
@@ -22,13 +23,8 @@ Route::post('/signin', [AuthController::class, 'login']);
 
 Route::group(['middleware' => ['auth:api']], function () {
 
-    // Route::post('/users', 'Api\UserController@index')->middleware(['scope:user.index']);
-    // ->middleware(['scopes:post.index,user.index']);
+    Route::get('/testusers', function(){
+        return DB::table('users')->all();
+    })->middleware('scope:user.index');
 
-
-    // Route::post('/test', function (Request $request) {
-    //     if ($request->user()->tokenCan('post.index')) {
-    //         return 'Can list posts';
-    //     }
-    // });
 });
