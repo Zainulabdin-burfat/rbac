@@ -78,7 +78,7 @@ class PermissionsServiceProvider extends ServiceProvider
         $all_permissions = Permission::select('name')->get()->pluck('name')->toArray();
         $permissions = [];
         foreach ($all_permissions as $permission) {
-            $permissions[$permission->name] = $permission->name;
+            $permissions[$permission] = $permission;
         }
         Passport::tokensCan($permissions);
     }
