@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Zainburfat\rbac\Models\Role;
 use Zainburfat\rbac\Models\UserRole;
+use Zainburfat\rbac\Providers\PermissionsServiceProvider;
 
 class CreateControllerPermission extends Command
 {
