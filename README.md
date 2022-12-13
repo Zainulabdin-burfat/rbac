@@ -55,7 +55,10 @@
     }
 
 <br>
-<li><p>Finally, in your application's config/auth.php configuration file, you should define an api authentication guard and set the driver option to passport. This will instruct your application to use Passport's TokenGuard when authenticating incoming API requests:</p></li>
+
+<p>
+    Finally, in your application's config/auth.php configuration file, you should define an api authentication guard and set the driver option to passport. This will instruct your application to use Passport's TokenGuard when authenticating incoming API requests.
+</p>
 
 <br>
 
@@ -72,23 +75,21 @@
     ],
 
 <br>
-
 <h5>Add route middleware for api routes authorization</h5>
 <p>app/http/kernel.php under protected $routeMiddleware</p>
-<li>
+
     'scopes' => \Laravel\Passport\Http\Middleware\CheckScopes::class,
     'scope' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
-</li>
+
+<br>
 <h5>How to protect routes using scopes auth</h5>
-<li>
+
     Route::group(['middleware' => 'auth:api'], function(){
         Route::get('/users', 'UserController@index')->middleware('scope:user.index');
     });
-</li>
-
-<h5>To check multiple scopes</h5>
 
 <br>
+<h5>To check multiple scopes</h5>
 
     ->middleware('scopes:check-status,place-orders');
 
