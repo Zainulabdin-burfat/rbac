@@ -106,3 +106,17 @@
     ->middleware('scopes:check-status,place-orders');
 
 <br>
+<h5>Login credentials</h5>
+
+    admin@admin.com
+    password
+
+<br>
+<h5>Login url</h5>
+
+    http://127.0.0.1:8000/signin
+    
+<br>
+<h5>Test after login with token</h5>
+
+    http://127.0.0.1:8000/api/users
