@@ -1,6 +1,6 @@
 <p align="center">
 <a href="https://packagist.org/packages/zainburfat/rbac"><img src="https://img.shields.io/badge/Downloads-demo-green" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/zainburfat/rbac"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<!--<a href="https://packagist.org/packages/zainburfat/rbac"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a> -->
 <a href="https://packagist.org/packages/zainburfat/rbac"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
