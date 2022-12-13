@@ -133,4 +133,4 @@
 <br>
 <h5>Test after login with token</h5>
 
-    http://127.0.0.1:8000/api/users
+    http://127.0.0.1:8000/testusers
