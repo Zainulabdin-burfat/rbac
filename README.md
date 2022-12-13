@@ -16,9 +16,9 @@
 
 <h3>Commands</h3>
 
-<li>composer require zainburfat/rbac</li>
+    composer require zainburfat/rbac
 <li>use Trait in User Model <b> use UserPermissionTrait</b></li>
-<li>php artisan migrate</li>
+    php artisan migrate
 
 <br>
 <h5>Add route middleware for web routes authorization</h5>
@@ -33,7 +33,9 @@
 <!-- Passport Installation -->
 <li>php artisan passport:install</li>
 <p>Permissions are created dynamically through command according to the controllers having methods</p>
-<li>php artisan create:permission</li>
+
+    php artisan create:permission
+
 <p>
     After running the passport:install command, add the Laravel\Passport\HasApiTokens trait to your App\Models\User model. This trait will provide a few helper  methods to your model which allow you to inspect the authenticated user's token and scopes. If your model is already using the Laravel\Sanctum\HasApiTokens trait, you may remove that trait.
 </p>
@@ -41,6 +43,7 @@
 <br>
 
     namespace App\Models;
+
     use Illuminate\Database\Eloquent\Factories\HasFactory;
     use Illuminate\Foundation\Auth\User as Authenticatable;
     use Illuminate\Notifications\Notifiable;
@@ -87,6 +90,6 @@
 
 <br>
 
-->middleware('scopes:check-status,place-orders');
+    ->middleware('scopes:check-status,place-orders');
 
 <br>
