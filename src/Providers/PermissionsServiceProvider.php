@@ -37,10 +37,6 @@ class PermissionsServiceProvider extends ServiceProvider
     {
         $this->createScopes();
 
-        Passport::tokensExpireIn(now()->addSeconds(20));
-        Passport::personalAccessTokensExpireIn(now()->addSeconds(20));
-        Passport::refreshTokensExpireIn(now()->addHours(1));
-
         try {
             Permission::get()->map(function ($permission) {
                 Gate::define($permission->name, function ($user) use ($permission) {
@@ -81,5 +77,9 @@ class PermissionsServiceProvider extends ServiceProvider
             $permissions[$permission] = $permission;
         }
         Passport::tokensCan($permissions);
+
+        Passport::tokensExpireIn(now()->addSeconds(20));
+        Passport::personalAccessTokensExpireIn(now()->addSeconds(20));
+        Passport::refreshTokensExpireIn(now()->addHours(1));
     }
 }
