@@ -30,6 +30,20 @@
     php artisan migrate
 
 <br>
+<b>Add this code to AuthServiceProvider.php</b>
+
+    use Laravel\Passport\Passport;
+    use Zainburfat\rbac\Models\Permission;
+
+    Passport::routes();
+    $all_permissions = Permission::select('name')->get()->pluck('name')->toArray();
+    $permissions = [];
+    foreach ($all_permissions as $permission) {
+        $permissions[$permission] = $permission;
+    }
+    Passport::tokensCan($permissions);
+
+<br>
 <h5>Add route middleware for web routes authorization</h5>
 <p>app/http/kernel.php under protected $routeMiddleware</p>
 <br>

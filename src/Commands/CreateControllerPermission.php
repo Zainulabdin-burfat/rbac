@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Zainburfat\rbac\Models\Role;
 use Zainburfat\rbac\Models\UserRole;
-use Zainburfat\rbac\Providers\PermissionsServiceProvider;
 
 class CreateControllerPermission extends Command
 {
@@ -20,7 +19,6 @@ class CreateControllerPermission extends Command
     public function __construct()
     {
         parent::__construct();
-        PermissionsServiceProvider::createScopes();
     }
 
     public function getControllerMethodNames($controller, $controllerName, $namespace = "App\Http\Controllers")

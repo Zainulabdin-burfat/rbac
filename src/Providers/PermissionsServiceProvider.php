@@ -2,9 +2,7 @@
 
 namespace Zainburfat\rbac\Providers;
 
-use Zainburfat\rbac\Models\Permission;
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Passport\Passport;
 use Zainburfat\rbac\Commands\CreateControllerPermission;
@@ -35,19 +33,9 @@ class PermissionsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // $this->createScopes();
-
-        try {
-            Permission::get()->map(function ($permission) {
-                Gate::define($permission->name, function ($user) use ($permission) {
-                    return $user->hasPermissionTo($permission->name) || $user->hasDirectPermissionTo($permission->name);
-                });
-            });
-        } catch (\Exception $e) {
-            report($e);
-            return false;
-        }
-
+        Passport::tokensExpireIn(now()->addSeconds(20));
+        Passport::personalAccessTokensExpireIn(now()->addSeconds(20));
+        Passport::refreshTokensExpireIn(now()->addHours(1));
 
         //Blade directives
 
@@ -66,20 +54,5 @@ class PermissionsServiceProvider extends ServiceProvider
         Blade::directive('endrole', function () {
             return "<?php } ?>";
         });
-    }
-
-    public static function createScopes()
-    {
-        Passport::routes();
-        $all_permissions = Permission::select('name')->get()->pluck('name')->toArray();
-        $permissions = [];
-        foreach ($all_permissions as $permission) {
-            $permissions[$permission] = $permission;
-        }
-        Passport::tokensCan($permissions);
-
-        Passport::tokensExpireIn(now()->addSeconds(20));
-        Passport::personalAccessTokensExpireIn(now()->addSeconds(20));
-        Passport::refreshTokensExpireIn(now()->addHours(1));
     }
 }
