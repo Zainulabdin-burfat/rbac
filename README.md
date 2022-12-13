@@ -39,10 +39,11 @@
 
 
 
-
+<h5>Install Passport</h5>
 <br>
-<!-- Passport Installation -->
+
     php artisan passport:install
+
 <p>Permissions are created dynamically through command according to the controllers having methods</p>
 
     php artisan create:permission
