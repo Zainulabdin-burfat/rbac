@@ -34,12 +34,13 @@
 <li>php artisan passport:install</li>
 <p>Permissions are created dynamically through command according to the controllers having methods</p>
 <li>php artisan create:permission</li>
-<li>
-    <p>After running the passport:install command, add the Laravel\Passport\HasApiTokens trait to your App\Models\User model. This trait will provide a few helper methods to your model which allow you to inspect the authenticated user's token and scopes. If your model is already using the Laravel\Sanctum\HasApiTokens trait, you may remove that trait:</p>
-</li>
-<li>
+<p>
+    After running the passport:install command, add the Laravel\Passport\HasApiTokens trait to your App\Models\User model. This trait will provide a few helper  methods to your model which allow you to inspect the authenticated user's token and scopes. If your model is already using the Laravel\Sanctum\HasApiTokens trait, you may remove that trait.
+</p>
+
+<br>
+
     namespace App\Models;
-        
     use Illuminate\Database\Eloquent\Factories\HasFactory;
     use Illuminate\Foundation\Auth\User as Authenticatable;
     use Illuminate\Notifications\Notifiable;
@@ -49,9 +50,12 @@
     {
         use HasApiTokens, HasFactory, Notifiable;
     }
-</li>
+
+<br>
 <li><p>Finally, in your application's config/auth.php configuration file, you should define an api authentication guard and set the driver option to passport. This will instruct your application to use Passport's TokenGuard when authenticating incoming API requests:</p></li>
-<li>
+
+<br>
+
     'guards' => [
         'web' => [
             'driver' => 'session',
@@ -63,7 +67,8 @@
             'provider' => 'users',
         ],
     ],
-</li>
+
+<br>
 
 <h5>Add route middleware for api routes authorization</h5>
 <p>app/http/kernel.php under protected $routeMiddleware</p>
@@ -77,10 +82,11 @@
         Route::get('/users', 'UserController@index')->middleware('scope:user.index');
     });
 </li>
+
 <h5>To check multiple scopes</h5>
-<li>->middleware('scopes:check-status,place-orders')</li>
 
+<br>
 
-
+->middleware('scopes:check-status,place-orders');
 
 <br>
