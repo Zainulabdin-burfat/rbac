@@ -43,6 +43,7 @@
 
 <br>
 <b>Add this code to AuthServiceProvider.php under boot() method</b>
+<p>It will create scopes for API having all permissions in the permission table</p>
 
 ```php
     use Laravel\Passport\Passport;
@@ -153,6 +154,10 @@
 ```php
     http://127.0.0.1:8000/signin
 ```
+
+<br>
+<h5>After login it will generate a token for specific user having permissions</h5>
+
 
 <br>
 <h5>Test API after login with token</h5>
