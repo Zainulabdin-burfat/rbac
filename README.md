@@ -9,7 +9,13 @@
 <h2>Laravel - Role Based Access Control</h2>
 
 <h3>Custom Route Wise Access Control</h3>
-<h4>This package allows you to manage user permissions and roles in a database, authentication and authorization</h4>
+<h4>This package allows you to manage user permissions and roles in a database.authentication and authorization</h4>
+<ol type="1">
+    <li>Custom RBAC like Spatie permissions package</li>
+    <li>Laravel Passport provides a full OAuth2 server implementation for your Laravel application in a matter of minutes. Passport is built on top of the League OAuth2 server that is maintained by Andy Millington and Simon Hamp.</li>
+</ol>
+
+<br>
 <h3>Prerequisites</h3>
 <li>Laravel >= 8</li>
 <li>php >= 7.3</li>
