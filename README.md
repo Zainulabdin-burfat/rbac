@@ -70,9 +70,7 @@
 
 <br>
 <p>After running the passport:install command, add the Laravel\Passport\HasApiTokens trait to your App\Models\User model. This trait will provide a few helper  methods to your model which allow you to inspect the authenticated user's token and scopes. If your model is already using the Laravel\Sanctum\HasApiTokens trait, you may remove that trait.</p>
-```php
-$user->can('edit articles');
-```
+
     namespace App\Models;
 
     use Illuminate\Database\Eloquent\Factories\HasFactory;
