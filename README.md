@@ -37,7 +37,7 @@
 <br>
 <b>Run migrations</b>
 
-```php
+```bash
     php artisan migrate
 ```
 
@@ -69,14 +69,14 @@
 <br>
 <h5>Install Passport</h5>
 
-```php
+```bash
     php artisan passport:install
 ```
 
 <br>
 <p>Permissions are created dynamically through command according to the controllers having methods</p>
 
-```php
+```bash
     php artisan create:permission
 ```
 
