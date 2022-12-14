@@ -20,18 +20,18 @@
 <li>Laravel >= 8</li>
 <li>php >= 7.3</li>
 
-<h3>Commands</h3>
 <br>
+<h3>Commands</h3>
 
     composer require zainburfat/rbac
 
-<b>use Trait in User Model</b>
 <br>
+<b>use Trait in User Model</b>
 
     use UserPermissionTrait
 
-<b>Then run migrations</b>
 <br>
+<b>Run migrations</b>
 
     php artisan migrate
 
@@ -52,27 +52,24 @@
 <br>
 <h5>Add route middleware for web routes authorization</h5>
 <p>app/http/kernel.php under protected $routeMiddleware</p>
-<br>
 
     'permissions' => \Zainburfat\rbac\Middleware\Permissions::class,
 
 
 
 
-<h5>Install Passport</h5>
 <br>
+<h5>Install Passport</h5>
 
     php artisan passport:install
 
+<br>
 <p>Permissions are created dynamically through command according to the controllers having methods</p>
 
     php artisan create:permission
 
-<p>
-    After running the passport:install command, add the Laravel\Passport\HasApiTokens trait to your App\Models\User model. This trait will provide a few helper  methods to your model which allow you to inspect the authenticated user's token and scopes. If your model is already using the Laravel\Sanctum\HasApiTokens trait, you may remove that trait.
-</p>
-
 <br>
+<p>After running the passport:install command, add the Laravel\Passport\HasApiTokens trait to your App\Models\User model. This trait will provide a few helper  methods to your model which allow you to inspect the authenticated user's token and scopes. If your model is already using the Laravel\Sanctum\HasApiTokens trait, you may remove that trait.</p>
 
     namespace App\Models;
 
@@ -87,12 +84,7 @@
     }
 
 <br>
-
-<p>
-    Finally, in your application's config/auth.php configuration file, you should define an api authentication guard and set the driver option to passport. This will instruct your application to use Passport's TokenGuard when authenticating incoming API requests.
-</p>
-
-<br>
+<p>Finally, in your application's config/auth.php configuration file, you should define an api authentication guard and set the driver option to passport. This will instruct your application to use Passport's TokenGuard when authenticating incoming API requests.</p>
 
     'guards' => [
         'web' => [
