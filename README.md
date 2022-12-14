@@ -23,21 +23,28 @@
 <br>
 <h3>Commands</h3>
 
+```bash
     composer require zainburfat/rbac
+```
 
 <br>
 <b>Use trait in the "User" model</b>
 
+```php
     use UserPermissionTrait
+```
 
 <br>
 <b>Run migrations</b>
 
+```php
     php artisan migrate
+```
 
 <br>
 <b>Add this code to AuthServiceProvider.php under boot() method</b>
 
+```php
     use Laravel\Passport\Passport;
     use Zainburfat\rbac\Models\Permission;
 
@@ -48,29 +55,35 @@
         $permissions[$permission] = $permission;
     }
     Passport::tokensCan($permissions);
+```
 
 <br>
 <h5>Add route middleware for web routes authorization</h5>
 <p>app/http/kernel.php under protected $routeMiddleware</p>
 
+```php
     'permissions' => \Zainburfat\rbac\Middleware\Permissions::class,
-
-
+```
 
 
 <br>
 <h5>Install Passport</h5>
 
+```php
     php artisan passport:install
+```
 
 <br>
 <p>Permissions are created dynamically through command according to the controllers having methods</p>
 
+```php
     php artisan create:permission
+```
 
 <br>
 <p>After running the passport:install command, add the Laravel\Passport\HasApiTokens trait to your App\Models\User model. This trait will provide a few helper  methods to your model which allow you to inspect the authenticated user's token and scopes. If your model is already using the Laravel\Sanctum\HasApiTokens trait, you may remove that trait.</p>
 
+```php
     namespace App\Models;
 
     use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -82,10 +95,12 @@
     {
         use HasApiTokens, HasFactory, Notifiable;
     }
+```
 
 <br>
 <p>Finally, in your application's config/auth.php configuration file, you should define an api authentication guard and set the driver option to passport. This will instruct your application to use Passport's TokenGuard when authenticating incoming API requests.</p>
 
+```php
     'guards' => [
         'web' => [
             'driver' => 'session',
@@ -97,38 +112,51 @@
             'provider' => 'users',
         ],
     ],
+```
 
 <br>
 <h5>Add route middleware for api routes authorization</h5>
 <p>app/http/kernel.php under protected $routeMiddleware</p>
 
+```php
     'scopes' => \Laravel\Passport\Http\Middleware\CheckScopes::class,
     'scope' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
+```
 
 <br>
 <h5>How to protect routes using scopes auth</h5>
 
+```php
     Route::group(['middleware' => 'auth:api'], function(){
         Route::get('/users', 'UserController@index')->middleware('scope:user.index');
     });
+```
 
 <br>
 <h5>To check multiple scopes</h5>
 
+```php
     ->middleware('scopes:check-status,place-orders');
+```
 
 <br>
 <h5>Login credentials</h5>
 
+```php
     admin@admin.com
     password
+```
 
 <br>
 <h5>Login url</h5>
 
+```php
     http://127.0.0.1:8000/signin
-    
+```
+
 <br>
 <h5>Test after login with token</h5>
 
+```php
     http://127.0.0.1:8000/testusers
+```
