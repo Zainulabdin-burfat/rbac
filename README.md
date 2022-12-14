@@ -36,7 +36,7 @@
     php artisan migrate
 
 <br>
-<b>Add this code to AuthServiceProvider.php</b>
+<b>Add this code to AuthServiceProvider.php under boot() method</b>
 
     use Laravel\Passport\Passport;
     use Zainburfat\rbac\Models\Permission;
