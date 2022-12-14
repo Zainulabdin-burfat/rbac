@@ -26,7 +26,7 @@
     composer require zainburfat/rbac
 
 <br>
-<b>use Trait in User Model</b>
+<b>Use trait in the "User" model</b>
 
     use UserPermissionTrait
 
