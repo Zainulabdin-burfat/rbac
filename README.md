@@ -20,123 +20,148 @@
 <li>Laravel >= 8</li>
 <li>php >= 7.3</li>
 
+<br>
 <h3>Commands</h3>
+
+``` bash
+composer require zainburfat/rbac
+```
+
 <br>
+<b>Use trait in the "User" model</b>
 
-    composer require zainburfat/rbac
+```php
+use UserPermissionTrait
+```
 
-<b>use Trait in User Model</b>
 <br>
+<b>Run migrations</b>
 
-    use UserPermissionTrait
-
-<b>Then run migrations</b>
-<br>
-
-    php artisan migrate
+``` bash
+php artisan migrate
+```
 
 <br>
 <b>Add this code to AuthServiceProvider.php under boot() method</b>
+<p>It will create scopes for API having all permissions in the permission table</p>
 
-    use Laravel\Passport\Passport;
-    use Zainburfat\rbac\Models\Permission;
+```php
+use Laravel\Passport\Passport;
+use Zainburfat\rbac\Models\Permission;
 
-    Passport::routes();
-    $all_permissions = Permission::select('name')->get()->pluck('name')->toArray();
-    $permissions = [];
-    foreach ($all_permissions as $permission) {
-        $permissions[$permission] = $permission;
-    }
-    Passport::tokensCan($permissions);
+Passport::routes();
+$all_permissions = Permission::select('name')->get()->pluck('name')->toArray();
+$permissions = [];
+foreach ($all_permissions as $permission) {
+    $permissions[$permission] = $permission;
+}
+Passport::tokensCan($permissions);
+```
 
 <br>
 <h5>Add route middleware for web routes authorization</h5>
 <p>app/http/kernel.php under protected $routeMiddleware</p>
+
+```php
+'permissions' => \Zainburfat\rbac\Middleware\Permissions::class,
+```
+
+
 <br>
-
-    'permissions' => \Zainburfat\rbac\Middleware\Permissions::class,
-
-
-
-
 <h5>Install Passport</h5>
+
+``` bash
+php artisan passport:install
+```
+
 <br>
-
-    php artisan passport:install
-
 <p>Permissions are created dynamically through command according to the controllers having methods</p>
 
-    php artisan create:permission
-
-<p>
-    After running the passport:install command, add the Laravel\Passport\HasApiTokens trait to your App\Models\User model. This trait will provide a few helper  methods to your model which allow you to inspect the authenticated user's token and scopes. If your model is already using the Laravel\Sanctum\HasApiTokens trait, you may remove that trait.
-</p>
+``` bash
+php artisan create:permission
+```
 
 <br>
+<p>After running the passport:install command, add the Laravel\Passport\HasApiTokens trait to your App\Models\User model. This trait will provide a few helper  methods to your model which allow you to inspect the authenticated user's token and scopes. If your model is already using the Laravel\Sanctum\HasApiTokens trait, you may remove that trait.</p>
 
-    namespace App\Models;
+```php
+namespace App\Models;
 
-    use Illuminate\Database\Eloquent\Factories\HasFactory;
-    use Illuminate\Foundation\Auth\User as Authenticatable;
-    use Illuminate\Notifications\Notifiable;
-    use Laravel\Passport\HasApiTokens;
-        
-    class User extends Authenticatable
-    {
-        use HasApiTokens, HasFactory, Notifiable;
-    }
-
-<br>
-
-<p>
-    Finally, in your application's config/auth.php configuration file, you should define an api authentication guard and set the driver option to passport. This will instruct your application to use Passport's TokenGuard when authenticating incoming API requests.
-</p>
-
-<br>
-
-    'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
     
-        'api' => [
-            'driver' => 'passport',
-            'provider' => 'users',
-        ],
+class User extends Authenticatable
+{
+    use HasApiTokens, HasFactory, Notifiable;
+}
+```
+
+<br>
+<p>Finally, in your application's config/auth.php configuration file, you should define an api authentication guard and set the driver option to passport. This will instruct your application to use Passport's TokenGuard when authenticating incoming API requests.</p>
+
+```php
+'guards' => [
+    'web' => [
+        'driver' => 'session',
+        'provider' => 'users',
     ],
+
+    'api' => [
+        'driver' => 'passport',
+        'provider' => 'users',
+    ],
+],
+```
 
 <br>
 <h5>Add route middleware for api routes authorization</h5>
 <p>app/http/kernel.php under protected $routeMiddleware</p>
 
-    'scopes' => \Laravel\Passport\Http\Middleware\CheckScopes::class,
-    'scope' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
+```php
+'scopes' => \Laravel\Passport\Http\Middleware\CheckScopes::class,
+'scope' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
+```
 
 <br>
 <h5>How to protect routes using scopes auth</h5>
 
-    Route::group(['middleware' => 'auth:api'], function(){
-        Route::get('/users', 'UserController@index')->middleware('scope:user.index');
-    });
+```php
+Route::group(['middleware' => 'auth:api'], function(){
+    Route::get('/users', 'UserController@index')->middleware('scope:user.index');
+});
+```
 
 <br>
 <h5>To check multiple scopes</h5>
 
-    ->middleware('scopes:check-status,place-orders');
+```php
+->middleware('scopes:check-status,place-orders');
+```
 
 <br>
 <h5>Login credentials</h5>
 
-    admin@admin.com
-    password
+```php
+admin@admin.com
+password
+```
 
 <br>
-<h5>Login url</h5>
+<h5>Login API</h5>
 
-    http://127.0.0.1:8000/signin
-    
+```php
+http://127.0.0.1:8000/signin
+```
+
 <br>
-<h5>Test after login with token</h5>
+<h5>After login it will generate a token for specific user having permissions</h5>
 
-    http://127.0.0.1:8000/testusers
+
+<br>
+<h5>Test API after login with token</h5>
+
+```php
+http://127.0.0.1:8000/testusers
+```
