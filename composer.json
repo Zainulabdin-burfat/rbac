@@ -1,6 +1,6 @@
 {
     "name": "zainburfat/rbac",
-    "description": "demo",
+    "description": "This package allows you to manage user permissions and roles in a database, authentication and authorization",
     "type": "library",
     "license": "MIT",
     "autoload": {

@@ -9,7 +9,7 @@
 <h2>Laravel - Role Based Access Control</h2>
 
 <h3>Custom Route Wise Access Control</h3>
-
+<h4>This package allows you to manage user permissions and roles in a database, authentication and authorization</h4>
 <h3>Prerequisites</h3>
 <li>Laravel >= 8</li>
 <li>php >= 7.3</li>
