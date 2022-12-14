@@ -23,7 +23,7 @@
 <br>
 <h3>Commands</h3>
 
-```bash
+``` bash
     composer require zainburfat/rbac
 ```
 
@@ -37,7 +37,7 @@
 <br>
 <b>Run migrations</b>
 
-```bash
+``` bash
     php artisan migrate
 ```
 
@@ -69,14 +69,14 @@
 <br>
 <h5>Install Passport</h5>
 
-```bash
+``` bash
     php artisan passport:install
 ```
 
 <br>
 <p>Permissions are created dynamically through command according to the controllers having methods</p>
 
-```bash
+``` bash
     php artisan create:permission
 ```
 
