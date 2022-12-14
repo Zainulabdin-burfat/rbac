@@ -148,14 +148,14 @@
 ```
 
 <br>
-<h5>Login url</h5>
+<h5>Login API</h5>
 
 ```php
     http://127.0.0.1:8000/signin
 ```
 
 <br>
-<h5>Test after login with token</h5>
+<h5>Test API after login with token</h5>
 
 ```php
     http://127.0.0.1:8000/testusers
