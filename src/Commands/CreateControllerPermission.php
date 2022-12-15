@@ -2,6 +2,7 @@
 
 namespace Zainburfat\rbac\Commands;
 
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Zainburfat\rbac\Models\Permission;
 use Zainburfat\rbac\Models\RolePermission;
@@ -40,6 +41,15 @@ class CreateControllerPermission extends Command
 
     public function handle()
     {
+        // Check if UserPermissionTrait has been used in the User model
+        if (!method_exists((new User), 'hasDirectPermissionTo')){
+            $this->newLine();
+            $this->error("Trait not used (UserPermissionTrait) in the User model");
+            $this->newLine();
+            return 0;
+        }
+
+        // Check if migrations has been run and package table exists
         if (!Schema::hasTable('permissions') || !Schema::hasTable('roles')) {
             $this->newLine();
             $this->error("No package tables Found, run migrations may solve this..!");
