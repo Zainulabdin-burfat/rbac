@@ -7,7 +7,10 @@ use Zainburfat\rbac\Models\Permission;
 use Zainburfat\rbac\Models\RolePermission;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
+use ReflectionClass;
+use ReflectionMethod;
 use Zainburfat\rbac\Models\Role;
 use Zainburfat\rbac\Models\UserRole;
 
@@ -23,16 +26,13 @@ class CreateControllerPermission extends Command
 
     public function getControllerMethodNames($controller, $controllerName, $namespace = "App\Http\Controllers")
     {
-        $controller_methods = get_class_methods($namespace . '\\' . $controller);
-        $methods = [];
-        foreach ($controller_methods as $method) {
-            if ($method === "__construct")
-                continue;
+        $class = new ReflectionClass($namespace . '\\' . $controller);
+        $class_methods = $class->getMethods(ReflectionMethod::IS_PUBLIC);
 
-            $methods[] = (string) Str::of($controllerName)->append(" " . $method)->slug('.');
-
-            if ($method === "destroy")
-                break;
+        foreach ($class_methods as $method) {
+            if ($method->class == $namespace . '\\' . $controller && $method->name != '__contruct') {
+                $methods[] = (string) Str::of($controllerName)->append(" " . $method->name)->slug('.');
+            }
         }
 
         return $methods;
@@ -40,6 +40,13 @@ class CreateControllerPermission extends Command
 
     public function handle()
     {
+        if (!Schema::hasTable('permissions') || !Schema::hasTable('roles')) {
+            $this->newLine();
+            $this->error("No package tables Found, run migrations may solve this..!");
+            $this->newLine();
+            return 0;
+        }
+
         $this->newLine(2);
 
         $files = File::files("app/Http/Controllers");
@@ -126,7 +133,8 @@ class CreateControllerPermission extends Command
         }
 
         $this->newLine(2);
-        $this->alert("The last method of controllers should be destroy() method, otherwise it will not create any permissions after that.");
+        $this->info("Command run successfully..!");
+        $this->newLine(2);
         return 1;
     }
 }
