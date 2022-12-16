@@ -1,6 +1,6 @@
 {
     "name": "zainburfat/rbac",
-    "description": "This package allows you to manage user permissions and roles in a database, authentication and authorization",
+    "description": "This package allows you to manage user permissions and roles in a database and authentication and authorization",
     "type": "library",
     "license": "MIT",
     "autoload": {
@@ -15,9 +15,6 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {
-        "laravel/passport": "^10.4"
-    },
     "extra": {
         "laravel": {
             "providers": [
