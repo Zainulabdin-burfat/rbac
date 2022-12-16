@@ -3,17 +3,13 @@
 namespace Zainburfat\rbac\Commands;
 
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
 use Zainburfat\rbac\Models\Permission;
-use Zainburfat\rbac\Models\RolePermission;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use ReflectionClass;
 use ReflectionMethod;
-use Zainburfat\rbac\Models\Role;
-use Zainburfat\rbac\Models\UserRole;
 
 class CreateControllerPermission extends Command
 {
@@ -42,7 +38,7 @@ class CreateControllerPermission extends Command
     public function handle()
     {
         // Check if UserPermissionTrait has been used in the User model
-        if (!method_exists((new User), 'hasDirectPermissionTo')){
+        if (!method_exists((new User), 'hasDirectPermissionTo')) {
             $this->newLine();
             $this->error("Trait not used (UserPermissionTrait) in the User model");
             $this->newLine();
@@ -104,12 +100,9 @@ class CreateControllerPermission extends Command
         $this->info("$newPermissions new permissions were created and $oldPermissions permissions already exists.");
         $this->newLine(2);
 
-
-
+/*
         // Here we assign all permissions to demo admin role
-
         $permissions = Permission::get('id')->pluck('id')->toArray();
-
 
         $user = DB::table('users')->insertOrIgnore([
             'name' => 'Admin',
@@ -132,16 +125,17 @@ class CreateControllerPermission extends Command
 
         if ($permissionIds) {
             $rolePermission = RolePermission::insertOrIgnore($permissionIds);
-            if ($rolePermission)
+            if ($rolePermission) {
                 $this->info("$rolePermission Permissions assigned to Admin");
-            else
+            } else {
                 $this->warn("Permissions already assigned to Admin");
+            }
         } else {
             $this->newLine();
             $this->warn("No Permissions Found..!");
             $this->newLine();
         }
-
+*/
         $this->newLine(2);
         $this->info("Command run successfully..!");
         $this->newLine(2);

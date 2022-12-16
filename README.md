@@ -12,7 +12,7 @@
 <h4>This package allows you to manage user permissions and roles in a database and authentication and authorization</h4>
 <ol type="1">
     <li>Custom RBAC user based roles and permissions package</li>
-    <li>Laravel Passport provides a full OAuth2 server implementation for your Laravel application in a matter of minutes. Passport is built on top of the League OAuth2 server that is maintained by Andy Millington and Simon Hamp.</li>
+    <li>Custom RBAC provides a full token based server implementation for your Laravel application in a matter of minutes.</li>
 </ol>
 
 <br>
@@ -41,22 +41,6 @@ use UserPermissionTrait
 ```
 
 <br>
-<h5>Add route middleware for web routes authorization</h5>
-<p>app/http/kernel.php under protected $routeMiddleware</p>
-
-```php
-'permissions' => \Zainburfat\rbac\Middleware\Permissions::class,
-```
-
-
-<br>
-<h5>Install Passport</h5>
-
-``` bash
-php artisan passport:install
-```
-
-<br>
 <p>Permissions are created dynamically through command according to the controllers having methods</p>
 
 ``` bash
@@ -64,7 +48,7 @@ php artisan create:permission
 ```
 
 <br>
-<p>Finally, in your application's config/auth.php configuration file, you should define an api authentication guard and set the driver option to passport. This will instruct your application to use Passport's TokenGuard when authenticating incoming API requests.</p>
+<p>Use API driver as token or which ever you are using eg:Passport, Sactum, etc... </p>
 
 ```php
 'guards' => [
@@ -73,8 +57,9 @@ php artisan create:permission
     ],
 
     'api' => [
-        'driver' => 'passport',
+        'driver' => 'token',
         'provider' => 'users',
+        'hash' => true
     ],
 ],
 ```
@@ -84,17 +69,22 @@ php artisan create:permission
 <p>app/http/kernel.php under protected $routeMiddleware</p>
 
 ```php
-'scopes' => \Laravel\Passport\Http\Middleware\CheckScopes::class,
-'scope' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
+'scope' => \Zainburfat\rbac\Middleware\Scope::class,
 ```
 
 <br>
-<h5>How to protect routes using scopes auth</h5>
+<h5>How to protect routes using scope middleware for authorization</h5>
 
 ```php
 Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/users', 'UserController@index')->middleware('scope:user.index');
-    // for multiple check
-    // ->middleware('scopes:user.index, user.create');
 });
+```
+
+<br>
+<h5>Add route middleware for web routes authorization</h5>
+<p>app/http/kernel.php under protected $routeMiddleware</p>
+
+```php
+'permissions' => \Zainburfat\rbac\Middleware\Permissions::class,
 ```
