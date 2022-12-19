@@ -5,8 +5,6 @@ namespace Zainburfat\rbac\Providers;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Zainburfat\rbac\Commands\CreateControllerPermission;
-use Zainburfat\rbac\Models\Permission;
-use Illuminate\Support\Facades\Schema;
 
 class PermissionsServiceProvider extends ServiceProvider
 {
@@ -22,6 +20,11 @@ class PermissionsServiceProvider extends ServiceProvider
     }
 
     public function boot()
+    {
+        $this->registerBladeDirectives();
+    }
+
+    public function registerBladeDirectives()
     {
         //Blade directives
 
