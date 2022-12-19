@@ -23,10 +23,6 @@ class PermissionsServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        // if (Schema::hasTable('permissions')){
-        //     $this->createScopes();
-        // }
-
         //Blade directives
 
         // @permission('Admin') @endpermission
@@ -45,16 +41,4 @@ class PermissionsServiceProvider extends ServiceProvider
             return "<?php } ?>";
         });
     }
-
-    // public function createScopes()
-    // {
-    //     Passport::routes();
-    //     $all_permissions = Permission::select('name')->get()->pluck('name')->toArray();
-    //     $permissions = [];
-    //     foreach ($all_permissions as $permission) {
-    //         $permissions[$permission] = $permission;
-    //     }
-    //     Passport::tokensCan($permissions);
-    //     User::tokensCan($permissions);
-    // }
 }
