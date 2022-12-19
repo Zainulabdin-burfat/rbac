@@ -4,18 +4,12 @@ namespace Zainburfat\rbac\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
-use Laravel\Passport\Passport;
 use Zainburfat\rbac\Commands\CreateControllerPermission;
 use Zainburfat\rbac\Models\Permission;
 use Illuminate\Support\Facades\Schema;
 
 class PermissionsServiceProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     *
-     * @return void
-     */
     public function register()
     {
         if ($this->app->runningInConsole()) {
@@ -27,16 +21,11 @@ class PermissionsServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
     }
 
-    /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
     public function boot()
     {
-        if (Schema::hasTable('permissions')){
-            $this->createScopes();
-        }
+        // if (Schema::hasTable('permissions')){
+        //     $this->createScopes();
+        // }
 
         //Blade directives
 
@@ -57,14 +46,15 @@ class PermissionsServiceProvider extends ServiceProvider
         });
     }
 
-    public function createScopes()
-    {
-        Passport::routes();
-        $all_permissions = Permission::select('name')->get()->pluck('name')->toArray();
-        $permissions = [];
-        foreach ($all_permissions as $permission) {
-            $permissions[$permission] = $permission;
-        }
-        Passport::tokensCan($permissions);
-    }
+    // public function createScopes()
+    // {
+    //     Passport::routes();
+    //     $all_permissions = Permission::select('name')->get()->pluck('name')->toArray();
+    //     $permissions = [];
+    //     foreach ($all_permissions as $permission) {
+    //         $permissions[$permission] = $permission;
+    //     }
+    //     Passport::tokensCan($permissions);
+    //     User::tokensCan($permissions);
+    // }
 }

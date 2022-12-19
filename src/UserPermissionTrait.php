@@ -1,6 +1,6 @@
 <?php
 
-namespace Zainburfat\rbac\Traits;
+namespace Zainburfat\rbac;
 
 use Zainburfat\rbac\Models\Permission;
 use Zainburfat\rbac\Models\Role;

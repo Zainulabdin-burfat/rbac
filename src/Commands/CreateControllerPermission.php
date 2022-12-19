@@ -98,44 +98,7 @@ class CreateControllerPermission extends Command
         } // end foreach
 
         $this->info("$newPermissions new permissions were created and $oldPermissions permissions already exists.");
-        $this->newLine(2);
 
-/*
-        // Here we assign all permissions to demo admin role
-        $permissions = Permission::get('id')->pluck('id')->toArray();
-
-        $user = DB::table('users')->insertOrIgnore([
-            'name' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => bcrypt('password'),
-        ]);
-
-        $this->info(($user) ? "Admin created" : "Admin already exist");
-        $this->newLine();
-
-        $user = DB::table('users')->where('email', 'admin@admin.com')->first('id');
-
-        $role = Role::firstOrCreate(['name' => 'Admin']);
-        UserRole::insertOrIgnore(['user_id' => $user->id, 'role_id' => $role->id]);
-
-        $permissionIds = [];
-        foreach ($permissions as $permissionId) {
-            $permissionIds[] = ['role_id' => $role->id, 'permission_id' => $permissionId];
-        }
-
-        if ($permissionIds) {
-            $rolePermission = RolePermission::insertOrIgnore($permissionIds);
-            if ($rolePermission) {
-                $this->info("$rolePermission Permissions assigned to Admin");
-            } else {
-                $this->warn("Permissions already assigned to Admin");
-            }
-        } else {
-            $this->newLine();
-            $this->warn("No Permissions Found..!");
-            $this->newLine();
-        }
-*/
         $this->newLine(2);
         $this->info("Command run successfully..!");
         $this->newLine(2);
