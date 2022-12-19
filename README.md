@@ -12,7 +12,7 @@
 <h4>This package allows you to manage user permissions and roles in a database and authentication and authorization</h4>
 <ol type="1">
     <li>Custom RBAC user based roles and permissions package</li>
-    <li>Custom RBAC provides a full token based server implementation for your Laravel application in a matter of minutes.</li>
+    <li>Custom RBAC provides flexibility to use both Laravel/Sanctum, Laravel/Passport in a manner of minutes.</li>
 </ol>
 
 <br>
@@ -23,14 +23,14 @@
 <br>
 <h3>Commands</h3>
 
-``` bash
+```bash
 composer require zainburfat/rbac
 ```
 
 <br>
 <b>Run migrations</b>
 
-``` bash
+```bash
 php artisan migrate
 ```
 
@@ -43,43 +43,12 @@ use UserPermissionTrait
 <br>
 <p>Permissions are created dynamically through command according to the controllers having methods</p>
 
-``` bash
+```bash
 php artisan create:permission
 ```
 
 <br>
-<p>Use API driver as token or which ever you are using eg:Passport, Sactum, etc... </p>
-
-```php
-'guards' => [
-    'web' => [
-        ...
-    ],
-
-    'api' => [
-        'driver' => 'token',
-        'provider' => 'users',
-        'hash' => true
-    ],
-],
-```
-
-<br>
-<h5>Add route middleware for api routes authorization</h5>
-<p>app/http/kernel.php under protected $routeMiddleware</p>
-
-```php
-'scope' => \Zainburfat\rbac\Middleware\Scope::class,
-```
-
-<br>
 <h5>How to protect routes using scope middleware for authorization</h5>
-
-```php
-Route::group(['middleware' => 'auth:api'], function(){
-    Route::get('/users', 'UserController@index')->middleware('scope:user.index');
-});
-```
 
 <br>
 <h5>Add route middleware for web routes authorization</h5>
