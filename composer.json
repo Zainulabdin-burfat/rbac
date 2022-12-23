@@ -3,6 +3,10 @@
     "description": "This package allows you to manage user permissions and roles in a database and authentication and authorization",
     "type": "library",
     "license": "MIT",
+    "require": {
+        "laravel/sanctum": "^2.11",
+        "laravel/passport": "^10.4"
+    },
     "autoload": {
         "psr-4": {
             "Zainburfat\\rbac\\": "src/"
