@@ -13,7 +13,6 @@ class SanctumAdapter extends Authenticatable implements AuthInterface
 
     public function _createToken(string $name, array $abilities = ['*'])
     {
-        // return $this->createToken($name, $abilities);
         return $this->createToken($name, $abilities);
     }
 

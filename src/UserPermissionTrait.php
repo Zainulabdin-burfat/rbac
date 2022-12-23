@@ -16,8 +16,9 @@ trait UserPermissionTrait
     {
         foreach ($this->roles as $role) {
             $permissions = $role->permissions->pluck('name')->toArray();
-            if (in_array($permission, $permissions))
+            if (in_array($permission, $permissions)) {
                 return true;
+            }
         }
 
         return false;
@@ -31,8 +32,9 @@ trait UserPermissionTrait
     public function hasDirectPermissionTo($permission)
     {
         foreach ($this->permissions->toArray() as $permissionName) {
-            if ($permission == $permissionName['name'])
+            if ($permission == $permissionName['name']) {
                 return true;
+            }
         }
 
         return false;
@@ -41,8 +43,9 @@ trait UserPermissionTrait
     public function hasRole($role)
     {
         foreach ($this->roles->toArray() as $roleName) {
-            if (strtolower($roleName['name']) == strtolower($role))
+            if (strtolower($roleName['name']) == strtolower($role)) {
                 return true;
+            }
         }
         return false;
     }
