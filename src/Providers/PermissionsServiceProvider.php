@@ -22,6 +22,10 @@ class PermissionsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerBladeDirectives();
+
+        $this->publishes([
+            __DIR__.'/../config/customrbac.php' => config_path('customrbac.php'),
+        ]);
     }
 
     public function registerBladeDirectives()
