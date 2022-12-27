@@ -28,19 +28,19 @@ composer require zainburfat/rbac
 ```
 
 <br>
-<b>Run migrations</b>
+<h4>Run migrations</h4>
 
 ```bash
 php artisan migrate
 ```
 
-<b>Install Passport</b>
+<h4>Install Passport</h4>
 
 ```bash
 php artisan passport:install
 ```
 
-<b>Use trait in the "User" model</b>
+<h4>Use trait in the "User" model</h4>
 
 ```php
 use HasApiTokens
