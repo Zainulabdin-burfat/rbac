@@ -8,7 +8,7 @@
 
 <h2>Laravel - Role Based Access Control</h2>
 
-<h5>Custom Route Wise Access Control</h5>
+<h4>Custom Route Wise Access Control</h4>
 <h4>This package allows you to manage user permissions and roles in a database and Authentication and Authorization</h4>
 <ol type="1">
     <li>Custom RBAC user based roles and permissions package</li>
@@ -16,12 +16,12 @@
 </ol>
 
 <br>
-<h5>Prerequisites</h5>
+<h4>Prerequisites</h4>
 <li>Laravel >= 8</li>
 <li>php >= 7.3</li>
 
 <br>
-<h5>Commands</h5>
+<h4>Commands</h4>
 
 ```bash
 composer require zainburfat/rbac
@@ -49,14 +49,14 @@ use UserPermissionTrait
 ```
 
 <br>
-<h5>Permissions are created dynamically through command according to the controllers having methods</h5>
+<h4>Permissions are created dynamically through command according to the controllers having methods</h4>
 
 ```bash
 php artisan create:permission
 ```
 
-<h5>Finally, in your application's config/auth.php configuration file, you should define an api authentication guard and set the driver option to passport. This will instruct your application to use Passport's TokenGuard when authenticating incoming API requests:
-</h5>
+<h4>Finally, in your application's config/auth.php configuration file, you should define an api authentication guard and set the driver option to passport. This will instruct your application to use Passport's TokenGuard when authenticating incoming API requests:
+</h4>
 
 ```php
 'guards' => [
@@ -72,8 +72,8 @@ php artisan create:permission
 ```
 
 <br>
-<h5>By default, Passport issues long-lived access tokens that expire after one year. If you would like to configure a longer / shorter token lifetime, you may use the tokensExpireIn, refreshTokensExpireIn, and personalAccessTokensExpireIn methods. These methods should be called from the boot method of your application's App\Providers\AuthServiceProvider class:
-</h5>
+<h4>By default, Passport issues long-lived access tokens that expire after one year. If you would like to configure a longer / shorter token lifetime, you may use the tokensExpireIn, refreshTokensExpireIn, and personalAccessTokensExpireIn methods. These methods should be called from the boot method of your application's App\Providers\AuthServiceProvider class:
+</h4>
 
 ```php
 Passport::tokensExpireIn(now()->addDays(15));
@@ -82,7 +82,7 @@ Passport::personalAccessTokensExpireIn(now()->addMonths(6));
 ```
 
 <br>
-<h5>Add route middleware for web routes authorization</h5>
+<h4>Add route middleware for web routes authorization</h4>
 <p>app/http/kernel.php under protected $routeMiddleware</p>
 
 ```php
