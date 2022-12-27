@@ -6,7 +6,7 @@
             src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </h4>
 
-<h2>Laravel - Role Based Access Control</h2>
+<h1>Laravel - Role Based Access Control</h1>
 
 <h4>Custom Route Wise Access Control</h4>
 <h4>This package allows you to manage user permissions and roles in a database and Authentication and Authorization</h4>
