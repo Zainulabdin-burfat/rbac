@@ -8,7 +8,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Zainburfat\\rbac\\": "src/"
+            "Zainburfat\\Rbac\\": "src/"
         }
     },
     "authors": [
@@ -21,7 +21,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Zainburfat\\rbac\\Providers\\PermissionsServiceProvider"
+                "Zainburfat\\Rbac\\Providers\\PermissionsServiceProvider"
             ]
         }
     }

@@ -1,9 +1,9 @@
 <?php
 
-namespace Zainburfat\rbac\Commands;
+namespace Zainburfat\Rbac\Commands;
 
 use App\Models\User;
-use Zainburfat\rbac\Models\Permission;
+use Zainburfat\Rbac\Models\Permission;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;

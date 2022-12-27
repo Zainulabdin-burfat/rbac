@@ -1,11 +1,11 @@
 <?php
 
-namespace Zainburfat\rbac\Providers;
+namespace Zainburfat\Rbac\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Passport\Passport;
-use Zainburfat\rbac\Commands\CreateControllerPermission;
+use Zainburfat\Rbac\Commands\CreateControllerPermission;
 
 class PermissionsServiceProvider extends ServiceProvider
 {
@@ -25,10 +25,6 @@ class PermissionsServiceProvider extends ServiceProvider
         $this->registerBladeDirectives();
 
         Passport::routes();
-
-        Passport::tokensExpireIn(now()->addDays(15));
-        Passport::refreshTokensExpireIn(now()->addDays(30));
-        Passport::personalAccessTokensExpireIn(now()->addMonths(6));
     }
 
     public function registerBladeDirectives()

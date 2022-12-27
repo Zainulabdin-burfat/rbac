@@ -1,6 +1,6 @@
 <?php
 
-namespace Zainburfat\rbac\Middleware;
+namespace Zainburfat\Rbac\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Zainburfat\rbac;
+namespace Zainburfat\Rbac;
 
-use Zainburfat\rbac\Models\Permission;
-use Zainburfat\rbac\Models\Role;
+use Zainburfat\Rbac\Models\Permission;
+use Zainburfat\Rbac\Models\Role;
 
 trait UserPermissionTrait
 {
