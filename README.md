@@ -26,19 +26,19 @@
 composer require zainburfat/rbac
 ```
 
-<h4>Run migrations</h4>
+<h4>Run migrations:</h4>
 
 ```console
 php artisan migrate
 ```
 
-<h4>Install Passport</h4>
+<h4>Install Passport:</h4>
 
 ```console
 php artisan passport:install
 ```
 
-<h4>Use trait in the "User" model</h4>
+<h4>Use trait in the "User" model:</h4>
 
 ```php
 use HasApiTokens
@@ -46,13 +46,13 @@ use HasApiTokens
 use UserPermissionTrait
 ```
 
-<h4>Permissions are created dynamically through command according to the controllers having methods</h4>
+<h4>Permissions are created dynamically through command according to the controllers having methods:</h4>
 
 ```console
 php artisan create:permission
 ```
 
-<h4>Define an api authentication guard and set the driver option to passport in config/auth.php</h4>
+<h4>Define an api authentication guard and set the driver option to passport in config/auth.php:</h4>
 
 ```php
 'guards' => [
@@ -68,7 +68,7 @@ php artisan create:permission
 ],
 ```
 
-<h4>Set token expirations inside App\Providers\AuthServiceProvider class:</h4>
+<h4>Set token expirations inside App\Providers\AuthServiceProvider:</h4>
 
 ```php
 Passport::tokensExpireIn(now()->addDays(15));
@@ -76,12 +76,11 @@ Passport::refreshTokensExpireIn(now()->addDays(30));
 Passport::personalAccessTokensExpireIn(now()->addMonths(6));
 ```
 
-<h4>For more information about passport goto the
-<a href="https://laravel.com/docs/9.x/passport" target="_blank">Laravel Passport</a> documentation</h4>
+<h4>For more information about passport goto the <a href="https://laravel.com/docs/9.x/passport" target="_blank">Laravel Passport</a> documentation:</h4>
 
 <br>
 <h4>Add route middleware for web routes authorization.</h4>
-<h4>app/http/kernel.php under protected $routeMiddleware</h4>
+<h4>app/http/kernel.php under protected $routeMiddleware:</h4>
 
 ```php
 'permissions' => \Zainburfat\rbac\Middleware\Permissions::class,
