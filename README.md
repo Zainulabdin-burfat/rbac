@@ -12,7 +12,7 @@
 <h4>This package allows you to manage user permissions and roles in a database and Authentication and Authorization</h4>
 <ol type="1">
     <li>Custom RBAC user based roles and permissions package</li>
-    <li>Custom RBAC provides flexibility to use Laravel/Passport in a matter of minutes.</li>
+    <li>Custom RBAC provides flexibility to use Laravel/Passport in a manner of minutes.</li>
 </ol>
 
 <h4>Prerequisites</h4>
