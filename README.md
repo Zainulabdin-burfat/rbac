@@ -49,14 +49,14 @@ use UserPermissionTrait
 ```
 
 <br>
-<p>Permissions are created dynamically through command according to the controllers having methods</p>
+<h3>Permissions are created dynamically through command according to the controllers having methods</h3>
 
 ```bash
 php artisan create:permission
 ```
 
-<b>Finally, in your application's config/auth.php configuration file, you should define an api authentication guard and set the driver option to passport. This will instruct your application to use Passport's TokenGuard when authenticating incoming API requests:
-</b>
+<h3>Finally, in your application's config/auth.php configuration file, you should define an api authentication guard and set the driver option to passport. This will instruct your application to use Passport's TokenGuard when authenticating incoming API requests:
+</h3>
 
 ```php
 'guards' => [
@@ -72,8 +72,8 @@ php artisan create:permission
 ```
 
 <br>
-<p>By default, Passport issues long-lived access tokens that expire after one year. If you would like to configure a longer / shorter token lifetime, you may use the tokensExpireIn, refreshTokensExpireIn, and personalAccessTokensExpireIn methods. These methods should be called from the boot method of your application's App\Providers\AuthServiceProvider class:
-</p>
+<h3>By default, Passport issues long-lived access tokens that expire after one year. If you would like to configure a longer / shorter token lifetime, you may use the tokensExpireIn, refreshTokensExpireIn, and personalAccessTokensExpireIn methods. These methods should be called from the boot method of your application's App\Providers\AuthServiceProvider class:
+</h3>
 
 ```php
 Passport::tokensExpireIn(now()->addDays(15));
@@ -82,7 +82,7 @@ Passport::personalAccessTokensExpireIn(now()->addMonths(6));
 ```
 
 <br>
-<h5>Add route middleware for web routes authorization</h5>
+<h3>Add route middleware for web routes authorization</h3>
 <p>app/http/kernel.php under protected $routeMiddleware</p>
 
 ```php
