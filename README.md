@@ -76,8 +76,8 @@ Passport::refreshTokensExpireIn(now()->addDays(30));
 Passport::personalAccessTokensExpireIn(now()->addMonths(6));
 ```
 
-<p>For more information about passport goto the Laravel/Passport documentation</p>
-<a href="https://laravel.com/docs/9.x/passport" target="_blank">Laravel Passport</a>
+<p>For more information about passport goto the Laravel/Passport
+<a href="https://laravel.com/docs/9.x/passport" target="_blank">Laravel Passport</a> documentation</p>
 
 <br>
 <br>
