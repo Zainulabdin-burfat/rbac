@@ -21,19 +21,19 @@
 
 <p>Commands</p>
 
-```bash
+```php
 composer require zainburfat/rbac
 ```
 
 <p>Run migrations</p>
 
-```bash
+```php
 php artisan migrate
 ```
 
 <p>Install Passport</p>
 
-```bash
+```php
 php artisan passport:install
 ```
 
@@ -47,7 +47,7 @@ use UserPermissionTrait
 
 <p>Permissions are created dynamically through command according to the controllers having methods</p>
 
-```bash
+```php
 php artisan create:permission
 ```
 
