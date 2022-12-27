@@ -83,5 +83,5 @@ Passport::personalAccessTokensExpireIn(now()->addMonths(6));
 <h5>app/http/kernel.php under protected $routeMiddleware:</h5>
 
 ```php
-'permissions' => \Zainburfat\rbac\Middleware\Permissions::class,
+'permissions' => \Zainburfat\Rbac\Middleware\Permissions::class,
 ```
