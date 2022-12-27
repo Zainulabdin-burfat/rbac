@@ -16,7 +16,7 @@
 </ol>
 
 <h4>Prerequisites</h4>
-<li>Laravel ^8</li>
+<li>Laravel ^8.0</li>
 <li>Php ^7.3</li>
 <li>Laravel/Passport ^10.4</li>
 
