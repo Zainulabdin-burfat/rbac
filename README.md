@@ -80,7 +80,6 @@ Passport::personalAccessTokensExpireIn(now()->addMonths(6));
 <a href="https://laravel.com/docs/9.x/passport" target="_blank">Laravel Passport</a> documentation</p>
 
 <br>
-<br>
 <p>Add route middleware for web routes authorization.</p>
 <p>app/http/kernel.php under protected $routeMiddleware</p>
 
