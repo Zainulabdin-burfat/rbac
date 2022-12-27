@@ -15,19 +15,16 @@
     <li>Custom RBAC provides flexibility to use Laravel/Passport in a matter of minutes.</li>
 </ol>
 
-<br>
 <h4>Prerequisites</h4>
 <li>Laravel >= 8</li>
 <li>php >= 7.3</li>
 
-<br>
 <h4>Commands</h4>
 
 ```bash
 composer require zainburfat/rbac
 ```
 
-<br>
 <h4>Run migrations</h4>
 
 ```bash
@@ -48,7 +45,6 @@ use HasApiTokens
 use UserPermissionTrait
 ```
 
-<br>
 <h4>Permissions are created dynamically through command according to the controllers having methods</h4>
 
 ```bash
@@ -71,7 +67,6 @@ php artisan create:permission
 ],
 ```
 
-<br>
 <h4>By default, Passport issues long-lived access tokens that expire after one year. If you would like to configure a longer / shorter token lifetime, you may use the tokensExpireIn, refreshTokensExpireIn, and personalAccessTokensExpireIn methods. These methods should be called from the boot method of your application's App\Providers\AuthServiceProvider class:
 </h4>
 
@@ -81,7 +76,6 @@ Passport::refreshTokensExpireIn(now()->addDays(30));
 Passport::personalAccessTokensExpireIn(now()->addMonths(6));
 ```
 
-<br>
 <h4>Add route middleware for web routes authorization</h4>
 <p>app/http/kernel.php under protected $routeMiddleware</p>
 
