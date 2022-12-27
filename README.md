@@ -10,7 +10,7 @@
 
 <h5>Custom Route Wise Access Control</h5>
 <h5>This package allows you to manage user permissions and roles in a database and Authentication and Authorization</h5>
-<ol type="1">
+<ol type="i">
     <li>Custom RBAC user based roles and permissions package</li>
     <li>Custom RBAC provides flexibility to use Laravel/Passport in a manner of minutes.</li>
 </ol>
