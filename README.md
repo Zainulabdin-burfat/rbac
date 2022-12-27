@@ -21,19 +21,19 @@
 
 <p>Commands</p>
 
-```shell
+```console
 composer require zainburfat/rbac
 ```
 
 <p>Run migrations</p>
 
-```powerShell
+```console
 php artisan migrate
 ```
 
 <p>Install Passport</p>
 
-```shell
+```console
 php artisan passport:install
 ```
 
