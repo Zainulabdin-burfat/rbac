@@ -68,7 +68,7 @@ php artisan create:permission
 ],
 ```
 
-<h4>If you would like to configure a longer / shorter token lifetime, you may use the tokensExpireIn, refreshTokensExpireIn, and personalAccessTokensExpireIn methods. These methods should be called from the boot method of your application's App\Providers\AuthServiceProvider class:</h4>
+<h4>Set token expirations inside App\Providers\AuthServiceProvider class:</h4>
 
 ```php
 Passport::tokensExpireIn(now()->addDays(15));
