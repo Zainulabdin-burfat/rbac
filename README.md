@@ -52,7 +52,7 @@ use UserPermissionTrait
 php artisan create:permission
 ```
 
-<h4>Finally, in your application's config/auth.php configuration file, you should define an api authentication guard and set the driver option to passport. This will instruct your application to use Passport's TokenGuard when authenticating incoming API requests:</h4>
+<h4>Define an api authentication guard and set the driver option to passport in config/auth.php</h4>
 
 ```php
 'guards' => [
