@@ -27,13 +27,13 @@ composer require zainburfat/rbac
 
 <p>Run migrations</p>
 
-```PowerShell
+```powerShell
 php artisan migrate
 ```
 
 <p>Install Passport</p>
 
-```Shell
+```shell
 php artisan passport:install
 ```
 
