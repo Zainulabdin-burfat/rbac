@@ -77,7 +77,7 @@ Passport::personalAccessTokensExpireIn(now()->addMonths(6));
 ```
 
 #### For More Information About Passport Goto The Laravel/Passport Documentation
-<a target="_blank" href="https://laravel.com/docs/9.x/passport">Laravel Passport</a>
+<a href="https://laravel.com/docs/9.x/passport" target="_blank">Laravel Passport</a>
 <h4>Add route middleware for web routes authorization</h4>
 <p>app/http/kernel.php under protected $routeMiddleware</p>
 
