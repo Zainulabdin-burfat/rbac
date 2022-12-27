@@ -9,10 +9,10 @@
 <h2>Laravel - Role Based Access Control</h2>
 
 <h3>Custom Route Wise Access Control</h3>
-<h4>This package allows you to manage user permissions and roles in a database and authentication and authorization</h4>
+<h4>This package allows you to manage user permissions and roles in a database and Authentication and Authorization</h4>
 <ol type="1">
     <li>Custom RBAC user based roles and permissions package</li>
-    <li>Custom RBAC provides flexibility to use both Laravel/Sanctum, Laravel/Passport using Adapter pattern.</li>
+    <li>Custom RBAC provides flexibility to use Laravel/Passport in a matter of minutes.</li>
 </ol>
 
 <br>
@@ -34,6 +34,18 @@ composer require zainburfat/rbac
 php artisan migrate
 ```
 
+<b>Install Passport</b>
+
+```bash
+php artisan passport:install
+```
+
+<b>Use trait in the "User" model</b>
+
+```php
+use HasApiTokens
+```
+
 <b>Use trait in the "User" model</b>
 
 ```php
@@ -47,8 +59,31 @@ use UserPermissionTrait
 php artisan create:permission
 ```
 
+<b>Finally, in your application's config/auth.php configuration file, you should define an api authentication guard and set the driver option to passport. This will instruct your application to use Passport's TokenGuard when authenticating incoming API requests:
+</b>
+
+```php
+'guards' => [
+    'web' => [
+        ...
+    ],
+ 
+    'api' => [
+        'driver' => 'passport',
+        'provider' => 'users',
+    ],
+],
+```
+
 <br>
-<h5>How to protect routes using scope middleware for authorization</h5>
+<p>By default, Passport issues long-lived access tokens that expire after one year. If you would like to configure a longer / shorter token lifetime, you may use the tokensExpireIn, refreshTokensExpireIn, and personalAccessTokensExpireIn methods. These methods should be called from the boot method of your application's App\Providers\AuthServiceProvider class:
+</p>
+
+```php
+Passport::tokensExpireIn(now()->addDays(15));
+Passport::refreshTokensExpireIn(now()->addDays(30));
+Passport::personalAccessTokensExpireIn(now()->addMonths(6));
+```
 
 <br>
 <h5>Add route middleware for web routes authorization</h5>
