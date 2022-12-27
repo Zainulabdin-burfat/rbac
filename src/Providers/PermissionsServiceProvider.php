@@ -4,6 +4,7 @@ namespace Zainburfat\rbac\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Passport\Passport;
 use Zainburfat\rbac\Commands\CreateControllerPermission;
 
 class PermissionsServiceProvider extends ServiceProvider
@@ -23,9 +24,11 @@ class PermissionsServiceProvider extends ServiceProvider
     {
         $this->registerBladeDirectives();
 
-        $this->publishes([
-            __DIR__ . '/../config/customrbac.php' => config_path('customrbac.php'),
-        ]);
+        Passport::routes();
+
+        Passport::tokensExpireIn(now()->addDays(15));
+        Passport::refreshTokensExpireIn(now()->addDays(30));
+        Passport::personalAccessTokensExpireIn(now()->addMonths(6));
     }
 
     public function registerBladeDirectives()
