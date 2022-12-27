@@ -8,36 +8,36 @@
 
 <h2>Laravel - Role Based Access Control</h2>
 
-<h4>Custom Route Wise Access Control</h4>
-<h4>This package allows you to manage user permissions and roles in a database and Authentication and Authorization</h4>
+<p>Custom Route Wise Access Control</p>
+<p>This package allows you to manage user permissions and roles in a database and Authentication and Authorization</p>
 <ol type="1">
     <li>Custom RBAC user based roles and permissions package</li>
     <li>Custom RBAC provides flexibility to use Laravel/Passport in a matter of minutes.</li>
 </ol>
 
-<h4>Prerequisites</h4>
+<p>Prerequisites</p>
 <li>Laravel >= 8</li>
 <li>php >= 7.3</li>
 
-<h4>Commands</h4>
+<p>Commands</p>
 
 ```bash
 composer require zainburfat/rbac
 ```
 
-<h4>Run migrations</h4>
+<p>Run migrations</p>
 
 ```bash
 php artisan migrate
 ```
 
-<h4>Install Passport</h4>
+<p>Install Passport</p>
 
 ```bash
 php artisan passport:install
 ```
 
-<h4>Use trait in the "User" model</h4>
+<p>Use trait in the "User" model</p>
 
 ```php
 use HasApiTokens
@@ -45,14 +45,14 @@ use HasApiTokens
 use UserPermissionTrait
 ```
 
-<h4>Permissions are created dynamically through command according to the controllers having methods</h4>
+<p>Permissions are created dynamically through command according to the controllers having methods</p>
 
 ```bash
 php artisan create:permission
 ```
 
-<h4>Finally, in your application's config/auth.php configuration file, you should define an api authentication guard and set the driver option to passport. This will instruct your application to use Passport's TokenGuard when authenticating incoming API requests:
-</h4>
+<p>Finally, in your application's config/auth.php configuration file, you should define an api authentication guard and set the driver option to passport. This will instruct your application to use Passport's TokenGuard when authenticating incoming API requests:
+</p>
 
 ```php
 'guards' => [
@@ -67,8 +67,8 @@ php artisan create:permission
 ],
 ```
 
-<h4>By default, Passport issues long-lived access tokens that expire after one year. If you would like to configure a longer / shorter token lifetime, you may use the tokensExpireIn, refreshTokensExpireIn, and personalAccessTokensExpireIn methods. These methods should be called from the boot method of your application's App\Providers\AuthServiceProvider class:
-</h4>
+<p>By default, Passport issues long-lived access tokens that expire after one year. If you would like to configure a longer / shorter token lifetime, you may use the tokensExpireIn, refreshTokensExpireIn, and personalAccessTokensExpireIn methods. These methods should be called from the boot method of your application's App\Providers\AuthServiceProvider class:
+</p>
 
 ```php
 Passport::tokensExpireIn(now()->addDays(15));
@@ -76,9 +76,9 @@ Passport::refreshTokensExpireIn(now()->addDays(30));
 Passport::personalAccessTokensExpireIn(now()->addMonths(6));
 ```
 
-<h4>For More Information About Passport Goto The Laravel/Passport Documentation</h4>
+<p>For More Information About Passport Goto The Laravel/Passport Documentation</p>
 <a href="https://laravel.com/docs/9.x/passport" target="_blank">Laravel Passport</a>
-<h4>Add route middleware for web routes authorization</h4>
+<p>Add route middleware for web routes authorization</p>
 <p>app/http/kernel.php under protected $routeMiddleware</p>
 
 ```php
