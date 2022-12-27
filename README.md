@@ -51,12 +51,13 @@ use UserPermissionTrait
 php artisan create:permission
 ```
 
-<p>If your application authenticates different types of users that perhaps use entirely different Eloquent models, you will likely need to define a guard configuration for each user provider type in your application. This allows you to protect requests intended for specific user providers. For example, given the following guard configuration the config/auth.php configuration file:</p>
+<p>Finally, in your application's config/auth.php configuration file, you should define an api authentication guard and set the driver option to passport. This will instruct your application to use Passport's TokenGuard when authenticating incoming API requests:</p>
 
 ```php
 'guards' => [
     'web' => [
-        ...
+        'driver' => 'session',
+        'provider' => 'users',
     ],
  
     'api' => [
