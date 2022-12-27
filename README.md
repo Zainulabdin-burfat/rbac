@@ -44,11 +44,7 @@ php artisan passport:install
 
 ```php
 use HasApiTokens
-```
 
-<b>Use trait in the "User" model</b>
-
-```php
 use UserPermissionTrait
 ```
 
