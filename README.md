@@ -88,7 +88,7 @@ Passport::personalAccessTokensExpireIn(now()->addMonths(6));
 ```php
 Route::get('/orders', function () {
     // Access token has both "check-status" and "place-orders" scopes...
-})->middleware(['auth:api', 'scopes:user.index,order.create']);
+})->middleware(['auth:api', 'scopes:order.index,order.create']);
 ```
 
 <h5>The scope middleware may be assigned to a route to verify that the incoming request's access token has at least one of the listed scopes:</h5>
@@ -96,7 +96,7 @@ Route::get('/orders', function () {
 ```php
 Route::get('/orders', function () {
     // Access token has either "check-status" or "place-orders" scope...
-})->middleware(['auth:api', 'scope:user.index,order.create']);
+})->middleware(['auth:api', 'scope:order.index,order.create']);
 ```
 
 
