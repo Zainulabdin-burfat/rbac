@@ -2,6 +2,7 @@
 
 namespace Zainburfat\Rbac\Providers;
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Passport\Passport;
@@ -18,6 +19,10 @@ class PermissionsServiceProvider extends ServiceProvider
         }
 
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/auth.php', 'auth'
+        );
     }
 
     public function boot()
@@ -25,6 +30,10 @@ class PermissionsServiceProvider extends ServiceProvider
         $this->registerBladeDirectives();
 
         Passport::routes();
+
+        Passport::tokensExpireIn(now()->addDays(15));
+        Passport::refreshTokensExpireIn(now()->addDays(30));
+        Passport::personalAccessTokensExpireIn(now()->addMonths(6));
     }
 
     public function registerBladeDirectives()

@@ -24,5 +24,11 @@
                 "Zainburfat\\Rbac\\Providers\\PermissionsServiceProvider"
             ]
         }
+    },
+    "scripts": {
+        
+        "post-package-install": [
+            "@php artisan passport:install"
+        ]
     }
 }
