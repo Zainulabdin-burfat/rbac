@@ -68,12 +68,20 @@ php artisan create:permission
 ],
 ```
 
-<h5>Set token expirations inside App\Providers\AuthServiceProvider:</h5>
+<h5>Publish config file</h5>
 
 ```php
-Passport::tokensExpireIn(now()->addDays(15));
-Passport::refreshTokensExpireIn(now()->addDays(30));
-Passport::personalAccessTokensExpireIn(now()->addMonths(6));
+php artisan vendor:publish --tag=custom-rbac
+```
+
+<h5>Set token expirations inside config\customrbac.php:</h5>
+
+```php
+[
+    'tokensExpireIn' => now()->addDays(15),
+    'refreshTokensExpireIn' => now()->addDays(30),
+    'personalAccessTokensExpireIn' => now()->addMonths(6)
+]
 ```
 
 <h5>Passport includes two middleware that may be used to verify that an incoming request is authenticated with a token that has been granted a given scope. To get started, add the following middleware to the $routeMiddleware property of your app/Http/Kernel.php file:</h5>
