@@ -110,7 +110,7 @@ Route::get('/orders', function () {
 
 <br>
 <h5>Add route middleware for web routes authorization.</h5>
-<h5>app/http/kernel.php under protected $routeMiddleware:</h5>
+<p>app/http/kernel.php under protected $routeMiddleware:</p>
 
 ```php
 'permissions' => \Zainburfat\Rbac\Middleware\Permissions::class,
