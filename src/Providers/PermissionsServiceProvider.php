@@ -21,7 +21,7 @@ class PermissionsServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         $this->mergeConfigFrom(
-            __DIR__.'/../config/auth.php', 'auth'
+            __DIR__.'/../config/customrbac.php', 'customrbac'
         );
     }
 
