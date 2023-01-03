@@ -19,25 +19,21 @@ class PermissionsServiceProvider extends ServiceProvider
         }
 
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-
-        $this->mergeConfigFrom(
-            __DIR__.'/../config/customrbac.php', 'customrbac'
-        );
     }
 
     public function boot()
     {
         $this->publishes([
             __DIR__ . '/../config/customrbac.php' => config_path('customrbac.php'),
-        ]);
+        ], 'custom-rbac');
 
         $this->registerBladeDirectives();
 
         Passport::routes();
 
-        Passport::tokensExpireIn(now()->addDays(15));
-        Passport::refreshTokensExpireIn(now()->addDays(30));
-        Passport::personalAccessTokensExpireIn(now()->addMonths(6));
+        Passport::tokensExpireIn(config('tokensExpireIn'));
+        Passport::refreshTokensExpireIn(config('refreshTokensExpireIn'));
+        Passport::personalAccessTokensExpireIn(config('personalAccessTokensExpireIn'));
     }
 
     public function registerBladeDirectives()

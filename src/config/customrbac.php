@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'tokensExpireIn' => 100,
-    'refreshTokensExpireIn' => 100,
-    'personalAccessTokensExpireIn' => 100,
+    'tokensExpireIn' => now()->seconds(20),
+    'refreshTokensExpireIn' => now()->addDays(10),
+    'personalAccessTokensExpireIn' => now()->addDays(15),
 ];
