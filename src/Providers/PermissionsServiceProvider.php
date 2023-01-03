@@ -31,9 +31,9 @@ class PermissionsServiceProvider extends ServiceProvider
 
         Passport::routes();
 
-        Passport::tokensExpireIn(config('tokensExpireIn'));
-        Passport::refreshTokensExpireIn(config('refreshTokensExpireIn'));
-        Passport::personalAccessTokensExpireIn(config('personalAccessTokensExpireIn'));
+        Passport::tokensExpireIn(config('customrbac.tokensExpireIn'));
+        Passport::refreshTokensExpireIn(config('customrbac.refreshTokensExpireIn'));
+        Passport::personalAccessTokensExpireIn(config('customrbac.personalAccessTokensExpireIn'));
     }
 
     public function registerBladeDirectives()
