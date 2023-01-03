@@ -1,11 +1,7 @@
 <?php
 
 return [
-
-    'guards' => [
-        'api' => [
-            'driver' => 'passport',
-            'provider' => 'users',
-        ],
-    ],
+    'tokensExpireIn' => 100,
+    'refreshTokensExpireIn' => 100,
+    'personalAccessTokensExpireIn' => 100,
 ];
