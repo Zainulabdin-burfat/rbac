@@ -20,9 +20,13 @@ class PermissionsServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
-        $this->mergeConfigFrom(
-            __DIR__.'/../config/auth.php', 'auth'
-        );
+        // $this->mergeConfigFrom(
+        //     __DIR__.'/../config/auth.php', 'auth'
+        // );
+
+        $this->publishes([
+            __DIR__.'/../config/auth.php' => config_path('auth.php'),
+        ]);
     }
 
     public function boot()
