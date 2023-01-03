@@ -25,7 +25,7 @@ class PermissionsServiceProvider extends ServiceProvider
         // );
 
         $this->publishes([
-            __DIR__.'/../config/auth.php' => config_path('auth.php'),
+            __DIR__ . '/../config/customrbac.php' => config_path('customrbac.php'),
         ]);
     }
 
