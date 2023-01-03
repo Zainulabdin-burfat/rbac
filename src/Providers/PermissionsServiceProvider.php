@@ -23,14 +23,14 @@ class PermissionsServiceProvider extends ServiceProvider
         // $this->mergeConfigFrom(
         //     __DIR__.'/../config/auth.php', 'auth'
         // );
-
-        $this->publishes([
-            __DIR__ . '/../config/customrbac.php' => config_path('customrbac.php'),
-        ]);
     }
 
     public function boot()
     {
+        $this->publishes([
+            __DIR__ . '/../config/customrbac.php' => config_path('customrbac.php'),
+        ]);
+
         $this->registerBladeDirectives();
 
         Passport::routes();
