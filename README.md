@@ -82,17 +82,10 @@ php artisan vendor:publish --tag=custom-rbac
     'personalAccessTokensExpireIn' => now()->addMonths(6)
 ```
 
-<h5>Use PermissionsApi middleware to authorize user to specific route.</h5>
+<h5>Use PermissionsApi middleware to authorize user to specific Api route and for web routes use PermissionsWeb middleware</h5>
 <p>app/http/kernel.php under protected $routeMiddleware:</p>
 
 ```php
 'permissionsApi' => \Zainburfat\Rbac\Middleware\PermissionsApi::class,
-```
-
-
-<h5>Add route middleware for web routes authorization.</h5>
-<p>app/http/kernel.php under protected $routeMiddleware:</p>
-
-```php
 'permissionsWeb' => \Zainburfat\Rbac\Middleware\PermissionsWeb::class,
 ```
