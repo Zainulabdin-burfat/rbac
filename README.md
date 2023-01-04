@@ -82,36 +82,17 @@ php artisan vendor:publish --tag=custom-rbac
     'personalAccessTokensExpireIn' => now()->addMonths(6)
 ```
 
-<h5>Passport includes two middleware that may be used to verify that an incoming request is authenticated with a token that has been granted a given scope. To get started, add the following middleware to the $routeMiddleware property of your app/Http/Kernel.php file:</h5>
+<h5>Use PermissionsApi middleware to authorize user to specific route.</h5>
+<p>app/http/kernel.php under protected $routeMiddleware:</p>
 
 ```php
-'scopes' => \Laravel\Passport\Http\Middleware\CheckScopes::class,
-'scope' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
-```
-
-<h5>The scopes middleware may be assigned to a route to verify that the incoming request's access token has all of the listed scopes:</h5>
-
-```php
-Route::get('/orders', function () {
-    // Access token has both "order.index" and "order.create" scopes...
-})->middleware(['auth:api', 'scopes:order.index,order.create']);
-```
-
-<h5>The scope middleware may be assigned to a route to verify that the incoming request's access token has at least one of the listed scopes:</h5>
-
-```php
-Route::get('/orders', function () {
-    // Access token has either "order.index" or "order.create" scope...
-})->middleware(['auth:api', 'scope:order.index,order.create']);
+'permissionsApi' => \Zainburfat\Rbac\Middleware\PermissionsApi::class,
 ```
 
 
-<h5>For more information about passport goto the <a href="https://laravel.com/docs/9.x/passport" target="_blank">Laravel Passport</a> documentation:</h5>
-
-<br>
 <h5>Add route middleware for web routes authorization.</h5>
 <p>app/http/kernel.php under protected $routeMiddleware:</p>
 
 ```php
-'permissions' => \Zainburfat\Rbac\Middleware\Permissions::class,
+'permissionsWeb' => \Zainburfat\Rbac\Middleware\PermissionsWeb::class,
 ```

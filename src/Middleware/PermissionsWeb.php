@@ -5,7 +5,7 @@ namespace Zainburfat\Rbac\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class Permissions
+class PermissionsWeb
 {
     public function handle(Request $request, Closure $next)
     {
