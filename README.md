@@ -89,3 +89,12 @@ php artisan vendor:publish --tag=custom-rbac
 'permissionsApi' => \Zainburfat\Rbac\Middleware\PermissionsApi::class,
 'permissionsWeb' => \Zainburfat\Rbac\Middleware\PermissionsWeb::class,
 ```
+
+<h5>Login and register using package's route</h5>
+<p>For Login use paramenters ('email', 'passport')</p>
+<p>For Register use paramenters ('name', 'email', 'passport')</p>
+
+```php
+http://yourdomain/rbac_login
+http://yourdomain/rbac_register
+```
