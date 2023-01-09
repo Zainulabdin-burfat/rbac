@@ -72,8 +72,14 @@ class CreateControllerPermission extends Command
         foreach ($files as $controller) {
             $fileName       = $controller->getBasename();
             $filePathName   = $controller->getPathname();
-            $controller     = Str::of($filePathName)->afterLast('/')->remove('.php');
-            $controllerName = Str::of($filePathName)->afterLast('/')->remove('Controller.php');
+
+            if (PHP_VERSION > 7.4) {
+                $controller     = Str::of($filePathName)->afterLast('\\')->remove('.php');
+                $controllerName = Str::of($filePathName)->afterLast('\\')->remove('Controller.php');
+            } else {
+                $controller     = Str::of($filePathName)->afterLast('/')->remove('.php');
+                $controllerName = Str::of($filePathName)->afterLast('/')->remove('Controller.php');
+            }
 
             if ($fileName === "Controller.php")
                 continue;

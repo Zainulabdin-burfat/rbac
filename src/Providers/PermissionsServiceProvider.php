@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Passport\Passport;
 use Zainburfat\Rbac\Commands\CreateControllerPermission;
+use Zainburfat\Rbac\Models\Permission;
 
 class PermissionsServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,7 @@ class PermissionsServiceProvider extends ServiceProvider
         }
 
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
     }
 
     public function boot()
@@ -28,6 +30,25 @@ class PermissionsServiceProvider extends ServiceProvider
         ], 'custom-rbac');
 
         $this->registerBladeDirectives();
+
+        $this->registerPassportServices();
+    }
+
+    public function registerPassportServices()
+    {
+        $permission_all = Permission::all();
+
+        
+        $permissions = ['-'];
+
+        if ($permission_all) {
+            unset($permissions);
+            foreach ($permission_all as $permission) {
+                $permissions[$permission['name']] = $permission['name'];
+            }
+        }
+
+        Passport::tokensCan($permissions);
 
         Passport::routes();
 
