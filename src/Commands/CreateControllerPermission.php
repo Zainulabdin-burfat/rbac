@@ -24,9 +24,18 @@ class CreateControllerPermission extends Command
     public function getControllerMethodNames($controller, $controllerName, $namespace = "App\Http\Controllers")
     {
         $class = new ReflectionClass($namespace . '\\' . $controller);
+        if (Str::contains($class->getDocComment(), '@exclude-permission')) {
+            return [];
+        }
+
         $class_methods = $class->getMethods(ReflectionMethod::IS_PUBLIC);
 
+        $methods = [];
         foreach ($class_methods as $method) {
+            if (Str::contains($method->getDocComment(), '@exclude-permission')) {
+                continue;
+            }
+
             if ($method->class == $namespace . '\\' . $controller && $method->name != '__contruct') {
                 $methods[] = (string) Str::of($controllerName)->append(" " . $method->name)->slug('.');
             }
@@ -55,7 +64,16 @@ class CreateControllerPermission extends Command
 
         $this->newLine(2);
 
-        $files = File::files("app/Http/Controllers");
+        // Get Controllers path from config directories
+        $controllersPath = config('customrbac.controllersPath');
+        $files = [];
+        foreach ($controllersPath as $controllerPath) {
+            if (File::isDirectory($controllerPath)) {
+                $files[] = File::allFiles($controllerPath);
+            }
+        }
+
+        $files = call_user_func_array('array_merge', $files);
 
         if (isset($files[0]) && $files[0]->getBasename() === "Controller.php") {
             unset($files[0]);
@@ -73,13 +91,8 @@ class CreateControllerPermission extends Command
             $fileName       = $controller->getBasename();
             $filePathName   = $controller->getPathname();
 
-            if (PHP_VERSION > 7.4) {
-                $controller     = Str::of($filePathName)->afterLast('\\')->remove('.php');
-                $controllerName = Str::of($filePathName)->afterLast('\\')->remove('Controller.php');
-            } else {
-                $controller     = Str::of($filePathName)->afterLast('/')->remove('.php');
-                $controllerName = Str::of($filePathName)->afterLast('/')->remove('Controller.php');
-            }
+            $controller     = Str::of($filePathName)->afterLast('/')->remove('.php');
+            $controllerName = Str::of($filePathName)->afterLast('/')->remove('Controller.php');
 
             if ($fileName === "Controller.php")
                 continue;
