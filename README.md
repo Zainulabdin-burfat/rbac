@@ -46,6 +46,28 @@ use HasApiTokens
 use UserPermissionTrait
 ```
 
+<h5>To exclude some methods, class from creating permissions of them just add "@exclude-permission" in the docs block of class/method you want to exclude.</h5>
+
+```php
+/**
+ *...
+ *@exclude-permission
+ *...
+ */
+class SomeController extends Controller
+{
+    /**
+     *...
+     *@exclude-permission
+     *...
+     */
+    public function index()
+    {
+        ...
+    }
+}
+```
+
 <h5>Permissions are created dynamically through command according to the controllers having methods:</h5>
 
 ```console
