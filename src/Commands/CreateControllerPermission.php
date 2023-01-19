@@ -14,6 +14,7 @@ use ReflectionMethod;
 class CreateControllerPermission extends Command
 {
     protected $signature = 'create:permission';
+
     protected $description = 'Create permissions of the controllers.';
 
     public function __construct()
@@ -23,8 +24,18 @@ class CreateControllerPermission extends Command
 
     public function getControllerMethodNames($controller, $controllerName, $namespace = "App\Http\Controllers")
     {
-        $class = new ReflectionClass($namespace . '\\' . $controller);
+        $controllerName = strtolower($controllerName);
+        $namespace = (string) Str::of($namespace)->replace('/', '\\')->remove('.php')->ucfirst();
+
+        $class = new ReflectionClass($namespace);
+
+        // $class = new ReflectionClass($namespace . '\\' . $controller);
+
         if (Str::contains($class->getDocComment(), '@exclude-permission')) {
+            $result = Permission::where('name', 'like', $controllerName . ".%")->delete();
+            if ($result) {
+                $this->info("$result $controllerName permissions deleted");
+            }
             return [];
         }
 
@@ -33,6 +44,7 @@ class CreateControllerPermission extends Command
         $methods = [];
         foreach ($class_methods as $method) {
             if (Str::contains($method->getDocComment(), '@exclude-permission')) {
+                Permission::where('name', $controllerName . "." . $method->name)->delete();
                 continue;
             }
 
@@ -46,6 +58,8 @@ class CreateControllerPermission extends Command
 
     public function handle()
     {
+        // $this->callSilent('vendor:publish', ['--tag' => 'custom-rbac']);
+
         // Check if UserPermissionTrait has been used in the User model
         if (!method_exists((new User), 'hasDirectPermissionTo')) {
             $this->newLine();
@@ -66,6 +80,7 @@ class CreateControllerPermission extends Command
 
         // Get Controllers path from config directories
         $controllersPath = config('customrbac.controllersPath');
+
         $files = [];
         foreach ($controllersPath as $controllerPath) {
             if (File::isDirectory($controllerPath)) {
@@ -88,19 +103,20 @@ class CreateControllerPermission extends Command
         $oldPermissions = 0;
 
         foreach ($files as $controller) {
-            $fileName       = $controller->getBasename();
+            if ($controller->getBasename() === "Controller.php") {
+                continue;
+            }
+
             $filePathName   = $controller->getPathname();
 
             $controller     = Str::of($filePathName)->afterLast('/')->remove('.php');
             $controllerName = Str::of($filePathName)->afterLast('/')->remove('Controller.php');
 
-            if ($fileName === "Controller.php")
-                continue;
+            $methods = (array)$this->getControllerMethodNames($controller, $controllerName, $filePathName);
 
-            $methods = (array)$this->getControllerMethodNames($controller, $controllerName);
-
-            if (!count($methods))
-                $this->warn("No Methods Found In $controllerName");
+            if (!count($methods)) {
+                $this->warn("No methods found in $controllerName");
+            }
 
             foreach ($methods as $method) {
                 $permission = Permission::firstOrCreate(["name" => $method]);
